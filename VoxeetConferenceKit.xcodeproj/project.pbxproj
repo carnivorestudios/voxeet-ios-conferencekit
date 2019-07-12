@@ -25,6 +25,7 @@
 		CCF2BB5F224CDCDF00E9A88E /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCF2BB5D224CDCDF00E9A88E /* WebRTC.framework */; };
 		CCF2BB60224CDCDF00E9A88E /* VoxeetSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCF2BB5E224CDCDF00E9A88E /* VoxeetSDK.framework */; };
 		CCFF3DBF21904BF700541075 /* VoxeetConferenceKit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCFF3DBD21904BF700541075 /* VoxeetConferenceKit.storyboard */; };
+		F1340AB922D92E34008A58AA /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1340AB822D92E34008A58AA /* CircleButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		CCF2BB5E224CDCDF00E9A88E /* VoxeetSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VoxeetSDK.framework; path = Carthage/Build/iOS/VoxeetSDK.framework; sourceTree = "<group>"; };
 		CCFF3DBE21904BF700541075 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/VoxeetConferenceKit.storyboard; sourceTree = "<group>"; };
 		CCFF3DC021904C4200541075 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F1340AB822D92E34008A58AA /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			children = (
 				CCB49A922187407A003DD11C /* VCKPermission.swift */,
 				CC2B28B41E54501E00E3EB57 /* VoxeetConferenceKit.h */,
+				F1340AB822D92E34008A58AA /* CircleButton.swift */,
 				CC2B28B51E54501E00E3EB57 /* Info.plist */,
 				CCC1BF131FE424E600C61343 /* Localizable.strings */,
 			);
@@ -256,6 +259,7 @@
 				CCA1B81B225B70A4006EAB6F /* MPVolumeView+Extension.swift in Sources */,
 				CC5D082C1E56086F007845BA /* VCKViewController+VTConferenceDelegate.swift in Sources */,
 				CCB49A932187407A003DD11C /* VCKPermission.swift in Sources */,
+				F1340AB922D92E34008A58AA /* CircleButton.swift in Sources */,
 				CC2B28D21E54522100E3EB57 /* VoxeetConferenceKit.swift in Sources */,
 				CC2B290D1E5469C300E3EB57 /* VCKViewController.swift in Sources */,
 				CC5D082E1E56088B007845BA /* VCKViewController+UICollectionView.swift in Sources */,

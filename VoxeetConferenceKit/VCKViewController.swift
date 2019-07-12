@@ -37,9 +37,9 @@ class VCKViewController: UIViewController {
     @IBOutlet weak var flipImage: UIImageView!
     
     @IBOutlet weak private var bottomContainerView: UIView!
-    @IBOutlet weak private var microphoneButton: UIButton!
-    @IBOutlet weak private var cameraButton: UIButton!
-    @IBOutlet weak private var switchBuiltInSpeakerButton: UIButton!
+    @IBOutlet weak private var microphoneButton: CircleButton!
+    @IBOutlet weak private var cameraButton: CircleButton!
+    @IBOutlet weak private var switchBuiltInSpeakerButton: CircleButton!
     @IBOutlet weak private var screenShareButton: UIButton!
     @IBOutlet weak private var hangUpButton: UIButton!
     
@@ -156,10 +156,15 @@ class VCKViewController: UIViewController {
         mainAvatarContainer.alpha = 0
         alphaTransitionUI(minimized: false)
         
+        cameraButton.backgroundColor = UIColor(red:0.14, green:0.14, blue:0.14, alpha:1)
+        microphoneButton.backgroundColor = UIColor(red:0.14, green:0.14, blue:0.14, alpha:1)
+        switchBuiltInSpeakerButton.backgroundColor = UIColor.white
+        
         // Default behavior to check if video is enabled.
         if VoxeetSDK.shared.conference.defaultVideo {
             cameraButton.tag = 1
             cameraButton.setImage(UIImage(named: "CameraOn", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
+            cameraButton.backgroundColor = UIColor.white
         }
         // Selfie camera mirror.
         ownVideoRenderer.mirrorEffect = true
@@ -285,6 +290,11 @@ class VCKViewController: UIViewController {
         if let userID = VoxeetSDK.shared.session.user?.id {
             let isMuted = VoxeetSDK.shared.conference.toggleMute(userID: userID)
             microphoneButton.setImage(UIImage(named: isMuted ? "MicrophoneOff" : "MicrophoneOn", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
+            if (isMuted) {
+                microphoneButton.backgroundColor = UIColor.white
+            } else {
+                microphoneButton.backgroundColor = UIColor(red:0.14, green:0.14, blue:0.14, alpha:1)
+            }
         }
     }
     
@@ -295,6 +305,7 @@ class VCKViewController: UIViewController {
             if self.cameraButton.tag == 0 {
                 self.cameraButton.tag = 1
                 self.cameraButton.setImage(UIImage(named: "CameraOn", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
+                self.cameraButton.backgroundColor = UIColor.white
                 
                 VoxeetSDK.shared.conference.startVideo(userID: userID)
                 
@@ -305,7 +316,7 @@ class VCKViewController: UIViewController {
             } else {
                 self.cameraButton.tag = 0
                 self.cameraButton.setImage(UIImage(named: "CameraOff", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
-                
+                self.cameraButton.backgroundColor = UIColor(red:0.14, green:0.14, blue:0.14, alpha:1)
                 VoxeetSDK.shared.conference.stopVideo(userID: userID)
             }
         }
@@ -315,9 +326,11 @@ class VCKViewController: UIViewController {
         if switchBuiltInSpeakerButton.tag == 0 {
             switchBuiltInSpeakerButton.tag = 1
             switchBuiltInSpeakerButton.setImage(UIImage(named: "BuiltInSpeakerOff", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
+            switchBuiltInSpeakerButton.backgroundColor = UIColor(red:0.14, green:0.14, blue:0.14, alpha:1)
         } else {
             switchBuiltInSpeakerButton.tag = 0
             switchBuiltInSpeakerButton.setImage(UIImage(named: "BuiltInSpeakerOn", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
+            switchBuiltInSpeakerButton.backgroundColor = UIColor.white
         }
         
         // Switch device speaker and set the proximity sensor in line with the current speaker.
