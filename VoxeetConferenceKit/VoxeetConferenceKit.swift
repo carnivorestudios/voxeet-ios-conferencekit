@@ -407,8 +407,10 @@ extension VoxeetConferenceKit {
             vckVC?.conferenceStateLabel.text = NSLocalizedString("CONFERENCE_STATE_CALLING", bundle: Bundle(for: type(of: self)), comment: "")
             vckVC?.conferenceStateLabel.isHidden = false
             vckVC?.conferenceStateLabel.font = UIFont(name: "Poppins-Bold", size: 24)
+            vckVC?.usersCollectionView.isHidden = true
         case .connected:
             vckVC?.enableButtons(areEnabled: true)
+            vckVC?.usersCollectionView.isHidden = false
         case .disconnecting:
             // Update conference state label.
             if vckVC?.conferenceStateLabel.text == nil {
