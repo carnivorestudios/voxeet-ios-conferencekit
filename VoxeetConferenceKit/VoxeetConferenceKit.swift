@@ -31,11 +31,7 @@ import VoxeetSDK
         }
     }
     
-    @objc public var callName = "" {
-        didSet {
-            self.vckVC?.callNameLabel.text = callName
-        }
-    }
+    @objc public var callName = "" 
     
     // Conference's viewController properties.
     private var vckVC: VCKViewController?
@@ -348,6 +344,7 @@ import VoxeetSDK
  */
 
 extension VoxeetConferenceKit {
+    
     @objc private func participantUpdated(notification: NSNotification) {
         // Get JSON.
         guard let userInfo = notification.userInfo?.values.first as? Data else {
@@ -414,6 +411,7 @@ extension VoxeetConferenceKit {
             vckVC?.conferenceStateLabel.isHidden = false
             vckVC?.conferenceStateLabel.font = UIFont(name: "Poppins-Bold", size: 24)
             vckVC?.usersCollectionView.isHidden = true
+            vckVC?.callNameLabel.text = callName
         case .connected:
             vckVC?.enableButtons(areEnabled: true)
             vckVC?.usersCollectionView.isHidden = false
