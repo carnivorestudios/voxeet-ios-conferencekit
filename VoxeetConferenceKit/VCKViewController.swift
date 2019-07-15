@@ -569,7 +569,7 @@ class VCKViewController: UIViewController {
         if let imageURL = URL(string: imageURLStr) {
             mainAvatar.kf.setImage(with: imageURL)
         } else if user != nil {
-            mainAvatar.image = UIImage(named: "UserPlaceholder", in: Bundle(for: type(of: self)), compatibleWith: nil)
+            mainAvatar.image = InitialsImageFactory.imageWith(name: user?.avatarURL)
         }
         mainAvatarLabel.text = user?.name
         

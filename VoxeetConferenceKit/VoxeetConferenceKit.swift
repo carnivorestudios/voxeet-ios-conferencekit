@@ -411,6 +411,7 @@ extension VoxeetConferenceKit {
             vckVC?.conferenceStateLabel.isHidden = false
             vckVC?.conferenceStateLabel.font = UIFont(name: "Poppins-Bold", size: 24)
             vckVC?.usersCollectionView.isHidden = true
+            vckVC?.conferenceStateLabel.textColor = UIColor.white
             vckVC?.callNameLabel.text = VoxeetSDK.shared.conference.alias
         case .connected:
             vckVC?.enableButtons(areEnabled: true)
