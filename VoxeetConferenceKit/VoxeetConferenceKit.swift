@@ -31,6 +31,12 @@ import VoxeetSDK
         }
     }
     
+    @objc public var callName = "" {
+        didSet {
+            self.vckVC?.callNameLabel.text = callName
+        }
+    }
+    
     // Conference's viewController properties.
     private var vckVC: VCKViewController?
     private let vckVCMaximizeBgColor = UIColor(red: 49/255, green: 63/255, blue: 72/255, alpha: 1)

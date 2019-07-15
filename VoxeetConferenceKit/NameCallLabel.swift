@@ -21,7 +21,7 @@ class NameCallLabel: UILabel {
     }
     
     func setup() {
-        font = UIFont(name: "Poppins-ExtraBold", size: 17)
+        font = UIFont(name: "Poppins-ExtraBold", size: 19)
     }
 
 }

@@ -15,6 +15,7 @@ class VCKViewController: UIViewController {
     
     /* UI */
     
+    @IBOutlet weak var callNameLabel: NameCallLabel!
     @IBOutlet weak private var mainContainer: UIView!
     
     @IBOutlet weak var mainVideoRenderer: VTVideoView!
@@ -266,7 +267,7 @@ class VCKViewController: UIViewController {
     private func alphaTransitionUI(minimized: Bool) {
         topView.alpha = minimized ? 0 : 1
         bottomContainerView.alpha = minimized ? 0 : 1
-        conferenceTimerContainerView.alpha = minimized ? 1 : 0
+        conferenceTimerContainerView.alpha = 1
         mainAvatarLabel.alpha = minimized ? 0 : 1
         
         if cameraButton.tag != 0 {
