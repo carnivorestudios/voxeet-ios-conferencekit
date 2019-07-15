@@ -23,13 +23,13 @@ class InitialsImageFactory: NSObject {
         if let initialsArray = name?.components(separatedBy: " ") {
             
             if let firstWord = initialsArray.first {
-                if let firstLetter = firstWord.characters.first {
+                if let firstLetter = firstWord.first {
                     initials += String(firstLetter).capitalized
                 }
                 
             }
             if initialsArray.count > 1, let lastWord = initialsArray.last {
-                if let lastLetter = lastWord.characters.first {
+                if let lastLetter = lastWord.first {
                     initials += String(lastLetter).capitalized
                 }
                 
