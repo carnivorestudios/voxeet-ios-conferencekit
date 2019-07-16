@@ -566,7 +566,7 @@ class VCKViewController: UIViewController {
         mainUser = user
         let avatarURL = user?.avatarURL ?? ""
         if avatarURL.count == 2 {
-            mainAvatar.image = InitialsImageFactory.imageWith(initials: user?.avatarURL, user: user?)
+            mainAvatar.image = InitialsImageFactory.imageWith(initials: user?.avatarURL, user: user)
         } else {
             let imageURLStr = avatarURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
             if let imageURL = URL(string: imageURLStr) {
