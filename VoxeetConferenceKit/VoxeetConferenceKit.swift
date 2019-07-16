@@ -417,7 +417,8 @@ extension VoxeetConferenceKit {
             vckVC?.usersCollectionView.isHidden = false
             if let vc = self.vckVC  {
                 let date = Date().timeIntervalSince(vc.conferenceTimerStart)
-                if (Int(date) > 30 && !((vc.conferenceStateLabel.isHidden))) {
+                vc.conferenceStateLabel.text = "\(floor(date))"
+                if (floor(date) > 30 && !((vc.conferenceStateLabel.isHidden))) {
                     vc.hangUpAction()
                     vc.conferenceStateLabel.isHidden = true
                 }
