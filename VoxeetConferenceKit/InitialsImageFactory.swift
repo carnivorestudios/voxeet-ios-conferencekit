@@ -56,7 +56,7 @@ class InitialsImageFactory: NSObject {
         let nameLabel = UILabel(frame: frame)
         nameLabel.textAlignment = .center
         nameLabel.backgroundColor = colors[index]
-        nameLabel.layer.borderWidth = 6
+        nameLabel.layer.borderWidth = 4
         nameLabel.layer.borderColor = UIColor.white.cgColor
         nameLabel.layer.cornerRadius = frame.size.width/2
         nameLabel.textColor = .white
