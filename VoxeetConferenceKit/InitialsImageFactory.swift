@@ -57,7 +57,7 @@ class InitialsImageFactory: NSObject {
         nameLabel.textAlignment = .center
         nameLabel.backgroundColor = colors[index]
         nameLabel.textColor = .white
-        nameLabel.font = UIFont(name: "Poppins-SemiBold", size: 10)
+        nameLabel.font = UIFont(name: "Poppins-SemiBold", size: 25)
         
         nameLabel.text = initials
         UIGraphicsBeginImageContext(frame.size)
