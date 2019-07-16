@@ -10,33 +10,49 @@ import Foundation
 
 class InitialsImageFactory: NSObject {
     
-    class func imageWith(name: String?) -> UIImage? {
+    
+    class func imageWith(initials: String?) -> UIImage? {
         
         let frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        let colors:[UIColor] = ["263238".toUIColor(),
+                                "004d40".toUIColor(),
+                                "006064".toUIColor(),
+                                "311b92".toUIColor(),
+                                "263238".toUIColor(),
+                                "aa00ff".toUIColor(),
+                                "ff5722".toUIColor(),
+                                "110b43".toUIColor(),
+                                "3B34EC".toUIColor(),
+                                "8834EC".toUIColor(),
+                                "EC8C34".toUIColor(),
+                                "6BE367".toUIColor(),
+                                "CFE367".toUIColor(),
+                                "E36767".toUIColor(),
+                                "67AEE3".toUIColor(),
+                                "E367E0".toUIColor(),
+                                "34ECEB".toUIColor(),
+                                "8734EC".toUIColor(),
+                                "6768E3".toUIColor(),
+                                "37A6B3".toUIColor(),
+                                "764BA2".toUIColor(),
+                                "0BA360".toUIColor(),
+                                "A30B4B".toUIColor(),
+                                "0B2FA3".toUIColor(),
+                                "0BA1A3".toUIColor(),
+                                "1D1D1D".toUIColor(),
+                                "34D8EC".toUIColor(),
+                                "31BB99".toUIColor(),
+                                "667EEA".toUIColor(),
+                                "67E3DC".toUIColor(),
+                                "E36785".toUIColor(),
+                                "67C9E3".toUIColor(),
+                                "BBE367".toUIColor(),
+                                "C5C5C5".toUIColor()]
         let nameLabel = UILabel(frame: frame)
         nameLabel.textAlignment = .center
-        nameLabel.backgroundColor = .lightGray
+        nameLabel.backgroundColor = colors.randomElement()
         nameLabel.textColor = .white
-        nameLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        var initials = ""
-        
-        if let initialsArray = name?.components(separatedBy: " ") {
-            
-            if let firstWord = initialsArray.first {
-                if let firstLetter = firstWord.first {
-                    initials += String(firstLetter).capitalized
-                }
-                
-            }
-            if initialsArray.count > 1, let lastWord = initialsArray.last {
-                if let lastLetter = lastWord.first {
-                    initials += String(lastLetter).capitalized
-                }
-                
-            }
-        } else {
-            return nil
-        }
+        nameLabel.font = UIFont(name: "Poppins-SemiBold", size: 10)
         
         nameLabel.text = initials
         UIGraphicsBeginImageContext(frame.size)
