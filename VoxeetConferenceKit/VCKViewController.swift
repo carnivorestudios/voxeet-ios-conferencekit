@@ -518,11 +518,8 @@ class VCKViewController: UIViewController {
         DispatchQueue.main.async {
             if (floor(date) > 30 && !((self.conferenceStateLabel.isHidden))) {
                 let alertController = UIAlertController(title: "Error: Call Inactivity", message: "Call terminated from insufficient users", preferredStyle: UIAlertController.Style.alert)
-                 alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                 self.present(alertController, animated: true, completion: nil)
-                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                 alertController.dismiss(animated: true, completion: nil)
-                 }
+                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
                 self.hangUpAction()
             }
         }
