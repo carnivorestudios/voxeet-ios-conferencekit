@@ -415,6 +415,12 @@ extension VoxeetConferenceKit {
         case .connected:
             vckVC?.enableButtons(areEnabled: true)
             vckVC?.usersCollectionView.isHidden = false
+            if let vc = self.vckVC  {
+                let date = Date().timeIntervalSince(vc.conferenceTimerStart)
+                if (Int(date) > 30 && !((vc.conferenceStateLabel.isHidden))) {
+                    vc.hangUpAction()
+                }
+            }
         case .disconnecting:
             // Update conference state label.
             if vckVC?.conferenceStateLabel.text == nil {

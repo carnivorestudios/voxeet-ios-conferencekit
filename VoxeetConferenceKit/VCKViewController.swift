@@ -55,7 +55,7 @@ class VCKViewController: UIViewController {
     var activeSpeakerTimer: Timer?
     private var voiceLevelTimer: Timer?
     private var conferenceTimer: Timer?
-    private var conferenceTimerStart: Date!
+    private(set) var conferenceTimerStart: Date!
     private var conferenceTimerQueue = DispatchQueue(label: "com.voxeet.conferencekit.conferenceTimer", qos: .background, attributes: .concurrent)
     private var hangUpTimerCount: Int = 0
     private var hangUpTimer: Timer?
