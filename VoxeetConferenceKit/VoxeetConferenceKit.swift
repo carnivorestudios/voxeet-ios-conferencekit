@@ -420,6 +420,7 @@ extension VoxeetConferenceKit {
             if vckVC?.conferenceStateLabel.text == nil {
                 vckVC?.conferenceStateLabel.text = NSLocalizedString("CONFERENCE_STATE_ENDED", bundle: Bundle(for: type(of: self)), comment: "")
             }
+            vckVC?.conferenceStartTimer?.invalidate()
             vckVC?.conferenceStateLabel.isHidden = false
             
             // Hide main user.
