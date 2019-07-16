@@ -7,11 +7,11 @@
 //
 
 import Foundation
+import VoxeetSDK
 
 class InitialsImageFactory: NSObject {
     
-    
-    class func imageWith(initials: String?) -> UIImage? {
+    class func imageWith(initials: String?, user: VTUser?) -> UIImage? {
         
         let frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         let colors:[UIColor] = ["263238".toUIColor(),
@@ -48,9 +48,14 @@ class InitialsImageFactory: NSObject {
                                 "67C9E3".toUIColor(),
                                 "BBE367".toUIColor(),
                                 "C5C5C5".toUIColor()]
+        var total: Int = 0
+        for u in (user?.name!.unicodeScalars)! {
+            total += Int(UInt32(u))
+        }
+        let index = total % colors.count
         let nameLabel = UILabel(frame: frame)
         nameLabel.textAlignment = .center
-        nameLabel.backgroundColor = colors.randomElement()
+        nameLabel.backgroundColor = colors[index]
         nameLabel.textColor = .white
         nameLabel.font = UIFont(name: "Poppins-SemiBold", size: 10)
         
@@ -64,4 +69,27 @@ class InitialsImageFactory: NSObject {
         return nil
     }
     
+}
+extension String {
+    func toUIColor() -> UIColor {
+        var cString:String = self.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+        
+        if ((cString.count) != 6) {
+            return UIColor.gray
+        }
+        
+        var rgbValue:UInt32 = 0
+        Scanner(string: cString).scanHexInt32(&rgbValue)
+        
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
 }

@@ -31,11 +31,13 @@ extension VCKViewController: UICollectionViewDataSource {
         
         // Cell data.
         let avatarURL = user.avatarURL ?? ""
-        let imageURLStr = avatarURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        if let imageURL = URL(string: imageURLStr) {
-            cell.avatar.kf.setImage(with: imageURL)
+        if avatarURL.count == 2 {
+            cell.avatar.image = InitialsImageFactory.imageWith(initials: user.avatarURL, user: user)
         } else {
-            cell.avatar.image = UIImage(named: "UserPlaceholder", in: Bundle(for: type(of: self)), compatibleWith: nil)
+            let imageURLStr = avatarURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+            if let imageURL = URL(string: imageURLStr) {
+                cell.avatar.kf.setImage(with: imageURL)
+            }
         }
         cell.name.text = user.name
         
