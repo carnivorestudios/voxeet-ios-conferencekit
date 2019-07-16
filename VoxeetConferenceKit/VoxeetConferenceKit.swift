@@ -433,9 +433,7 @@ extension VoxeetConferenceKit {
             vckVC?.outgoingSound = nil
         case .disconnected:
             // Hide conference.
-            UIView.animate(withDuration: 3) {
-                self.hide()
-            }
+            hide()
         }
     }
 }
