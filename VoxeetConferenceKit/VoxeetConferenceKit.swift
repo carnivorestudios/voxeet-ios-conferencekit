@@ -417,10 +417,12 @@ extension VoxeetConferenceKit {
             vckVC?.usersCollectionView.isHidden = false
             if let vc = self.vckVC  {
                 let date = Date().timeIntervalSince(vc.conferenceTimerStart)
-                vc.conferenceStateLabel.text = "\(floor(date))"
-                if (floor(date) > 30 && !((vc.conferenceStateLabel.isHidden))) {
-                    vc.hangUpAction()
-                    vc.conferenceStateLabel.isHidden = true
+                while (floor(date) < 32) {
+                    vc.conferenceStateLabel.text = "\(floor(date))"
+                    if (floor(date) > 30 && !((vc.conferenceStateLabel.isHidden))) {
+                        vc.hangUpAction()
+                        vc.conferenceStateLabel.isHidden = true
+                    }
                 }
             }
         case .disconnecting:
