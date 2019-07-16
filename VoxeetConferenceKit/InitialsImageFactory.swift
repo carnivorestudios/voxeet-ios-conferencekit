@@ -13,7 +13,7 @@ class InitialsImageFactory: NSObject {
     
     class func imageWith(initials: String?, user: VTUser?) -> UIImage? {
         
-        let frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        let frame = CGRect(x: 0, y: 0, width: 115, height: 115)
         let colors:[UIColor] = ["263238".toUIColor(),
                                 "004d40".toUIColor(),
                                 "006064".toUIColor(),
@@ -57,7 +57,7 @@ class InitialsImageFactory: NSObject {
         nameLabel.textAlignment = .center
         nameLabel.backgroundColor = colors[index]
         nameLabel.textColor = .white
-        nameLabel.font = UIFont(name: "Poppins-SemiBold", size: 25)
+        nameLabel.font = UIFont(name: "Poppins-SemiBold", size: 18)
         
         nameLabel.text = initials
         UIGraphicsBeginImageContext(frame.size)
