@@ -515,7 +515,9 @@ class VCKViewController: UIViewController {
         let hour = date / 3600
         let minute = (date / 60).truncatingRemainder(dividingBy: 60)
         let second = date.truncatingRemainder(dividingBy: 60)
-        
+        if (floor(date) > 30 && !((self.conferenceStateLabel.isHidden))) {
+            self.hangUpAction()
+        }
         DispatchQueue.main.async {
             if hour >= 1 {
                 self.conferenceTimerLabel.text = String(format: "%02.0f:%02.0f:%02.0f", floor(hour), floor(minute), floor(second))
