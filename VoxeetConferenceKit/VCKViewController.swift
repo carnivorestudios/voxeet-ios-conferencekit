@@ -516,7 +516,7 @@ class VCKViewController: UIViewController {
         let minute = (date / 60).truncatingRemainder(dividingBy: 60)
         let second = date.truncatingRemainder(dividingBy: 60)
         DispatchQueue.main.async {
-            if (floor(date) > 60 && self.conferenceStartTimer?.isValid && !((self.conferenceStateLabel.isHidden))) {
+            if (floor(date) > 60 && (self.conferenceStartTimer?.isValid ?? false) && !((self.conferenceStateLabel.isHidden))) {
                 let alertController = UIAlertController(title: "Error: Call Inactivity", message: "Call terminated from insufficient users", preferredStyle: UIAlertController.Style.alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
