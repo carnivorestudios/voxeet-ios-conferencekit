@@ -419,6 +419,7 @@ extension VoxeetConferenceKit {
                 let date = Date().timeIntervalSince(vc.conferenceTimerStart)
                 if (Int(date) > 30 && !((vc.conferenceStateLabel.isHidden))) {
                     vc.hangUpAction()
+                    vc.conferenceStateLabel.isHidden = true
                 }
             }
         case .disconnecting:
