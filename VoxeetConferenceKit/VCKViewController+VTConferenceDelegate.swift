@@ -14,7 +14,9 @@ extension VCKViewController: VTConferenceDelegate {
         if userID == VoxeetSDK.shared.session.user?.id {
             // Monkey patch: Wait WebRTC media to be started.
             conferenceStartTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(conferenceStart), userInfo: nil, repeats: false)
-            self.callNameLabel.text = VoxeetSDK.shared.conference.alias
+            let title = VoxeetSDK.shared.conference.alias!
+            let endIndex = title.firstIndex(of: " ")!
+            self.callNameLabel.text = String(title[..<endIndex])
         } else {
             // Update user's audio position to listen each users clearly in a 3D environment.
             updateUserPosition()
@@ -87,6 +89,13 @@ extension VCKViewController: VTConferenceDelegate {
             
             // Update user's audio position to listen each users clearly in a 3D environment.
             updateUserPosition()
+            
+            if (VoxeetSDK.shared.conference.users.filter({ $0.asStream }).count < 2)  {
+                let alertController = UIAlertController(title: "Update: Call Ended", message: "Call terminated from insufficient users", preferredStyle: UIAlertController.Style.alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+                self.hangUpAction()
+            }
         }
     }
     
