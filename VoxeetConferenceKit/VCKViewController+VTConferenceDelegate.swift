@@ -90,7 +90,7 @@ extension VCKViewController: VTConferenceDelegate {
             // Update user's audio position to listen each users clearly in a 3D environment.
             updateUserPosition()
             
-            if (VoxeetSDK.shared.conference.users.filter({ $0.asStream }).count < 2)  {
+            if (VoxeetSDK.shared.conference.users.filter({ $0.asStream }).count == 1)  {
                 let alertController = UIAlertController(title: "Update: Call Ended", message: "Call terminated from insufficient users", preferredStyle: UIAlertController.Style.alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
