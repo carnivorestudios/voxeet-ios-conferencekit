@@ -16,9 +16,7 @@ extension VCKViewController: VTConferenceDelegate {
             conferenceStartTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(conferenceStart), userInfo: nil, repeats: false)
             let title = VoxeetSDK.shared.conference.alias ?? "Unnamed"
             let endIndex = title.firstIndex(of: ":")
-            self.viewDidLoad()
             self.callNameLabel.text = String(title[..<endIndex!])
-            self.enableButtons(areEnabled: true)
         } else {
             // Update user's audio position to listen each users clearly in a 3D environment.
             updateUserPosition()
