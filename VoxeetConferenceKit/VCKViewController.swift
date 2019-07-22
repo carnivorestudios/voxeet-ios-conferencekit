@@ -530,6 +530,12 @@ class VCKViewController: UIViewController {
                 self.conferenceTimerLabel.text = String(format: "%02.0f:%02.0f", floor(minute), floor(second))
             }
         }
+        if (!(NetworkStatus.shared.isReachable)) {
+            let alertController = UIAlertController(title: "Error: Connection Lost", message: "Unable to connect to internet", preferredStyle: UIAlertController.Style.alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+            self.hangUpAction()
+        }
     }
     
     @objc private func hangUpRetry() {
