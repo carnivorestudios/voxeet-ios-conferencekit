@@ -177,6 +177,7 @@ class VCKViewController: UIViewController {
         
         // Disable automatic screen lock.
         UIApplication.shared.isIdleTimerDisabled = true
+        NetworkStatus.shared.startListener()
         
         // Disable buttons until the end of join process.
         enableButtons(areEnabled: false)
