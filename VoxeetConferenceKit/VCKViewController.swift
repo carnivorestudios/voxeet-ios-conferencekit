@@ -531,6 +531,7 @@ class VCKViewController: UIViewController {
             }
         }
         if (!(NetworkStatus.shared.isReachable) && floor(date) > 10) {
+            self.conferenceTimer?.invalidate()
             let alertController = UIAlertController(title: "Error: Connection Lost", message: "Unable to connect to internet", preferredStyle: UIAlertController.Style.alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
             self.present(alertController, animated: true, completion: nil)
