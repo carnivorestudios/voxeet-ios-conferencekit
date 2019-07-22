@@ -396,11 +396,9 @@ class VCKViewController: UIViewController {
         }
         
         // If the conference is not connected yet, retry the hang up action after few milliseconds to stop the conference.
-        if (NetworkStatus.shared.isReachable) {
-            guard VoxeetSDK.shared.conference.state == .connected else {
-                hangUpTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(hangUpRetry), userInfo: nil, repeats: true)
-                return
-            }
+        guard VoxeetSDK.shared.conference.state == .connected else {
+            hangUpTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(hangUpRetry), userInfo: nil, repeats: true)
+            return
         }
         VoxeetSDK.shared.conference.leave()
     }
@@ -543,7 +541,7 @@ class VCKViewController: UIViewController {
     }
     
     @objc private func hangUpRetry() {
-        guard hangUpTimerCount < 50 else {
+        guard hangUpTimerCount < 4 else {
             hangUpTimer?.invalidate()
             hangUpTimer = nil
             hangUpTimerCount = 0
