@@ -59,6 +59,7 @@ class VCKViewController: UIViewController {
     private var conferenceTimerQueue = DispatchQueue(label: "com.voxeet.conferencekit.conferenceTimer", qos: .background, attributes: .concurrent)
     private var hangUpTimerCount: Int = 0
     private var hangUpTimer: Timer?
+    var titleString: String?
     
     // Sounds.
     var outgoingSound: AVAudioPlayer?
@@ -107,6 +108,8 @@ class VCKViewController: UIViewController {
         if UIDevice.current.userInterfaceIdiom != .phone {
             switchBuiltInSpeakerButton.isHidden = true
         }
+        
+        self.callNameLabel.text = self.titleString ?? "Unnamed"
         
         // Device orientation observer.
         NotificationCenter.default.addObserver(self, selector: #selector(deviceOrientationDidChange), name: UIDevice.orientationDidChangeNotification, object: nil)
@@ -541,7 +544,7 @@ class VCKViewController: UIViewController {
     }
     
     @objc private func hangUpRetry() {
-        guard hangUpTimerCount < 4 else {
+        guard hangUpTimerCount < 50 else {
             hangUpTimer?.invalidate()
             hangUpTimer = nil
             hangUpTimerCount = 0
