@@ -369,6 +369,43 @@ class VCKViewController: UIViewController {
         }
     }
     
+    func hangUpWithAlert() {
+        let alertController = UIAlertController(title: "Error: Connection Lost", message: "Unable to connect to internet", preferredStyle: UIAlertController.Style.alert)
+        self.present(alertController, animated: true, completion: nil)
+        // Block hang up action if the hangUpTimer if currently active.
+        guard hangUpTimer == nil else {
+            return
+        }
+        
+        // Hang up sound.
+        hangUpSound?.play()
+        
+        // Disable buttons when leaving.
+        enableButtons(areEnabled: false)
+        
+        // Remove audio observer to desactivate switchBuiltInSpeakerButton behaviour.
+        conferenceStartTimer?.invalidate()
+        NotificationCenter.default.removeObserver(self, name: AVAudioSession.routeChangeNotification, object: nil)
+        
+        // Hide conference state before stopping the conference.
+        conferenceStateLabel.isHidden = true
+        conferenceStateLabel.text = nil
+        
+        // Hide own video renderer.
+        if cameraButton.tag != 0 {
+            ownVideoRenderer.alpha = 0
+            flipImage.alpha = ownVideoRenderer.alpha
+        }
+        
+        // If the conference is not connected yet, retry the hang up action after few milliseconds to stop the conference.
+        guard VoxeetSDK.shared.conference.state == .connected else {
+            hangUpTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(hangUpRetry), userInfo: nil, repeats: true)
+            return
+        }
+        alertController.dismiss(animated: true, completion: nil)
+        VoxeetSDK.shared.conference.leave()
+    }
+    
     @IBAction func hangUpAction(_ sender: Any? = nil) {
         // Block hang up action if the hangUpTimer if currently active.
         guard hangUpTimer == nil else {
@@ -533,12 +570,7 @@ class VCKViewController: UIViewController {
         }
         if (!(NetworkStatus.shared.isReachable) && floor(date) > 7) {
             self.conferenceTimer?.invalidate()
-            let alertController = UIAlertController(title: "Error: Connection Lost", message: "Unable to connect to internet", preferredStyle: UIAlertController.Style.alert)
-            self.present(alertController, animated: true, completion: nil)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                alertController.dismiss(animated: true, completion: nil)
-            }
-            self.hangUpAction()
+            self.hangUpWithAlert()
         }
     }
     
