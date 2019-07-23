@@ -434,6 +434,7 @@ extension VoxeetConferenceKit {
             vckVC?.outgoingSound = nil
         case .disconnected:
             // Hide conference.
+            VoxeetSDK.shared.conference.leave()
             hide()
         }
     }
