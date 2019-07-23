@@ -433,10 +433,10 @@ class VCKViewController: UIViewController {
         }
         
         // If the conference is not connected yet, retry the hang up action after few milliseconds to stop the conference.
-        /*guard VoxeetSDK.shared.conference.state == .connected else {
+        guard VoxeetSDK.shared.conference.state == .connected else {
             hangUpTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(hangUpRetry), userInfo: nil, repeats: true)
             return
-        }*/
+        }
         VoxeetSDK.shared.conference.leave()
     }
     
