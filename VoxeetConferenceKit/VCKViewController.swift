@@ -536,7 +536,7 @@ class VCKViewController: UIViewController {
             let alertController = UIAlertController(title: "Error: Connection Lost", message: "Unable to connect to internet", preferredStyle: UIAlertController.Style.alert)
             self.present(alertController, animated: true, completion: nil)
             DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                self.dismiss(animated: true, completion: nil)
+                alertController.dismiss(animated: true, completion: nil)
             }
             self.hangUpAction()
         }
