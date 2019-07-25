@@ -17,7 +17,8 @@ extension VCKViewController: VTConferenceDelegate {
             while (VoxeetSDK.shared.conference.alias == nil) {
             }
             let endIndex = VoxeetSDK.shared.conference.alias!.firstIndex(of: ":")
-            self.callNameLabel.text = String(VoxeetSDK.shared.conference.alias![..<endIndex!])
+            //self.callNameLabel.text = String(VoxeetSDK.shared.conference.alias![..<endIndex!])
+            self.callNameLabel.text = VoxeetSDK.shared.conference.alias!
         } else {
             // Update user's audio position to listen each users clearly in a 3D environment.
             updateUserPosition()
