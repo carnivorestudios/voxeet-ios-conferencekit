@@ -14,7 +14,7 @@ extension VCKViewController: VTConferenceDelegate {
         if userID == VoxeetSDK.shared.session.user?.id {
             // Monkey patch: Wait WebRTC media to be started.
             conferenceStartTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(conferenceStart), userInfo: nil, repeats: false)
-            while (VoxeetSDK.shared.conference.alias == nil) {
+            while (VoxeetSDK.shared.conference.alias?.firstIndex(of: ":") == nil) {
             }
             let endIndex = VoxeetSDK.shared.conference.alias!.firstIndex(of: ":")
             //self.callNameLabel.text = String(VoxeetSDK.shared.conference.alias![..<endIndex!])
