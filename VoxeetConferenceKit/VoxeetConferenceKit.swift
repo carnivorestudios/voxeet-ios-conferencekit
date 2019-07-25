@@ -416,18 +416,18 @@ extension VoxeetConferenceKit {
             vckVC?.enableButtons(areEnabled: true)
             vckVC?.usersCollectionView.isHidden = false
         case .disconnecting:
+            // Hide main user.
+            vckVC?.activeSpeakerTimer?.invalidate()
+            vckVC?.updateMainUser(user: nil)
+            // Hide users collection view.
+            vckVC?.usersCollectionView.isHidden = true
+            
             // Update conference state label.
             if vckVC?.conferenceStateLabel.text == nil {
                 vckVC?.conferenceStateLabel.text = NSLocalizedString("CONFERENCE_STATE_ENDED", bundle: Bundle(for: type(of: self)), comment: "")
             }
             vckVC?.conferenceStartTimer?.invalidate()
             vckVC?.conferenceStateLabel.isHidden = false
-            
-            // Hide main user.
-            vckVC?.activeSpeakerTimer?.invalidate()
-            vckVC?.updateMainUser(user: nil)
-            // Hide users collection view.
-            vckVC?.usersCollectionView.isHidden = true
             
             // Stop outgoing sound if it was started.
             vckVC?.outgoingSound?.stop()
