@@ -31,6 +31,8 @@ extension VCKViewController: VTConferenceDelegate {
             conferenceStateLabel.isHidden = true
             conferenceStateLabel.text = nil
             
+            vckVC?.callNameLabel.text = VoxeetSDK.shared.conference.alias
+            
             // Stop outgoing sound when a user enters in conference.
             outgoingSound?.stop()
         }
