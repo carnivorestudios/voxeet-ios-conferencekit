@@ -30,7 +30,7 @@ class VCKViewController: UIViewController {
     @IBOutlet weak var minimizeButton: UIButton!
     @IBOutlet weak var usersCollectionView: UICollectionView!
     
-    @IBOutlet weak private var mainAvatarContainer: UIView!
+    @IBOutlet weak var mainAvatarContainer: UIView!
     @IBOutlet weak private var mainAvatar: UIImageView!
     @IBOutlet weak private var mainAvatarLabel: UILabel!
     @IBOutlet weak private var voiceIndicatorConstraintLeading: NSLayoutConstraint!

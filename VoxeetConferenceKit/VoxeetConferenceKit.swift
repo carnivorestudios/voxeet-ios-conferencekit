@@ -416,12 +416,6 @@ extension VoxeetConferenceKit {
             vckVC?.enableButtons(areEnabled: true)
             vckVC?.usersCollectionView.isHidden = false
         case .disconnecting:
-            // Hide main user.
-            vckVC?.activeSpeakerTimer?.invalidate()
-            vckVC?.updateMainUser(user: nil)
-            // Hide users collection view.
-            vckVC?.usersCollectionView.isHidden = true
-            
             // Update conference state label.
             if vckVC?.conferenceStateLabel.text == nil {
                 vckVC?.conferenceStateLabel.text = NSLocalizedString("CONFERENCE_STATE_ENDED", bundle: Bundle(for: type(of: self)), comment: "")
@@ -429,6 +423,16 @@ extension VoxeetConferenceKit {
             vckVC?.conferenceStartTimer?.invalidate()
             vckVC?.conferenceStateLabel.isHidden = false
             
+            // Hide main user.
+            vckVC?.activeSpeakerTimer?.invalidate()
+            vckVC?.updateMainUser(user: nil)
+            // Hide users collection view.
+            vckVC?.usersCollectionView.isHidden = true
+            
+            if (!NetworkStatus.shared.isReachable) {
+                vckVC?.mainAvatarContainer.alpha = 0
+            }
+    
             // Stop outgoing sound if it was started.
             vckVC?.outgoingSound?.stop()
             vckVC?.outgoingSound = nil
