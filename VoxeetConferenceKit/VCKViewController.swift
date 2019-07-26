@@ -370,8 +370,6 @@ class VCKViewController: UIViewController {
     }
     
     func hangUpWithAlert() {
-        self.mainAvatarContainer.isHidden = true
-        self.usersCollectionView.isHidden = true
         let alertController = UIAlertController(title: "Error: Connection Lost", message: "Unable to connect to internet", preferredStyle: UIAlertController.Style.alert)
         self.present(alertController, animated: true, completion: nil)
         // Block hang up action if the hangUpTimer if currently active.
