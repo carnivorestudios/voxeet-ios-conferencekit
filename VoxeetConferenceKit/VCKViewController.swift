@@ -544,10 +544,10 @@ class VCKViewController: UIViewController {
             shouldShowAlert = true
         }
         DispatchQueue.main.async {
-            if (!callNameSet) {
+            if (!self.callNameSet) {
                 if let endIndex = VoxeetSDK.shared.conference.alias?.firstIndex(of: ":") {
                     self.callNameLabel.text = String(VoxeetSDK.shared.conference.alias![..<endIndex])
-                    callNameSet = true
+                    self.callNameSet = true
                 }
             }
         }
