@@ -415,6 +415,7 @@ extension VoxeetConferenceKit {
         case .connected:
             vckVC?.enableButtons(areEnabled: true)
             vckVC?.usersCollectionView.isHidden = false
+            vckVC?.callNameLabel.text = VoxeetSDK.shared.conference.alias
         case .disconnecting:
             // Update conference state label.
             if vckVC?.conferenceStateLabel.text == nil {
