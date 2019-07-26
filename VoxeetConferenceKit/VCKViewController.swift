@@ -63,6 +63,8 @@ class VCKViewController: UIViewController {
     // Sounds.
     var outgoingSound: AVAudioPlayer?
     private var hangUpSound: AVAudioPlayer?
+    var callNameSet = false
+    var shouldShowAlert = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -369,43 +371,6 @@ class VCKViewController: UIViewController {
         }
     }
     
-    func hangUpWithAlert() {
-        let alertController = UIAlertController(title: "Error: Connection Lost", message: "Unable to connect to internet", preferredStyle: UIAlertController.Style.alert)
-        self.present(alertController, animated: true, completion: nil)
-        // Block hang up action if the hangUpTimer if currently active.
-        guard hangUpTimer == nil else {
-            return
-        }
-        
-        // Hang up sound.
-        hangUpSound?.play()
-        
-        // Disable buttons when leaving.
-        enableButtons(areEnabled: false)
-        
-        // Remove audio observer to desactivate switchBuiltInSpeakerButton behaviour.
-        conferenceStartTimer?.invalidate()
-        NotificationCenter.default.removeObserver(self, name: AVAudioSession.routeChangeNotification, object: nil)
-        
-        // Hide conference state before stopping the conference.
-        conferenceStateLabel.isHidden = true
-        conferenceStateLabel.text = nil
-        
-        // Hide own video renderer.
-        if cameraButton.tag != 0 {
-            ownVideoRenderer.alpha = 0
-            flipImage.alpha = ownVideoRenderer.alpha
-        }
-        
-        // If the conference is not connected yet, retry the hang up action after few milliseconds to stop the conference.
-        alertController.dismiss(animated: true, completion: nil)
-        guard VoxeetSDK.shared.conference.state == .connected else {
-            hangUpTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(hangUpRetry), userInfo: nil, repeats: true)
-            return
-        }
-        VoxeetSDK.shared.conference.leave()
-    }
-    
     @IBAction func hangUpAction(_ sender: Any? = nil) {
         // Block hang up action if the hangUpTimer if currently active.
         guard hangUpTimer == nil else {
@@ -568,9 +533,21 @@ class VCKViewController: UIViewController {
                 self.conferenceTimerLabel.text = String(format: "%02.0f:%02.0f", floor(minute), floor(second))
             }
         }
-        if (!(NetworkStatus.shared.isReachable) && floor(date) > 7) {
-            self.conferenceTimer?.invalidate()
-            self.hangUpWithAlert()
+        if (!(NetworkStatus.shared.isReachable) && floor(date) > 7 && shouldShowAlert) {
+            shouldShowAlert = false
+            let alertController = UIAlertController(title: "Error: Connection Lost", message: "Call will hang up automatically within a minute if connection is not found", preferredStyle: UIAlertController.Style.alert)
+            self.present(alertController, animated: true, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                alertController.dismiss(animated: true, completion: nil)
+            }
+        } else {
+            shouldShowAlert = true
+        }
+        if (!callNameSet) {
+            if !VoxeetSDK.shared.conference.users.filter({ $0.asStream }).isEmpty {
+                self.callNameLabel.text = VoxeetSDK.shared.conference.alias
+                callNameSet = true
+            }
         }
     }
     

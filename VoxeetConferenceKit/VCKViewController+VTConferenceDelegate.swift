@@ -16,7 +16,6 @@ extension VCKViewController: VTConferenceDelegate {
             conferenceStartTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(conferenceStart), userInfo: nil, repeats: false)
             /*if (VoxeetSDK.shared.conference.alias?.firstIndex(of: ":") == nil) {
                 self.callNameLabel.text = "Unnamed"
-                DispatchQueue.main.async
             } else {
                 let endIndex = VoxeetSDK.shared.conference.alias!.firstIndex(of: ":")
                 self.callNameLabel.text = String(VoxeetSDK.shared.conference.alias![..<endIndex!])
@@ -55,7 +54,6 @@ extension VCKViewController: VTConferenceDelegate {
                 self.ownVideoRenderer.alpha = stream.videoTracks.isEmpty ? 0 : 1
                 self.flipImage.alpha = self.ownVideoRenderer.alpha
             })
-            self.callNameLabel.text = VoxeetSDK.shared.conference.alias 
         } else {
             // Reload users' collection view.
             let users = VoxeetSDK.shared.conference.users
