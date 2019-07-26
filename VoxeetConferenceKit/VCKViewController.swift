@@ -540,12 +540,12 @@ class VCKViewController: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                 alertController.dismiss(animated: true, completion: nil)
             }
-        } else {
+        } else if (NetworkStatus.shared.isReachable || floor(date) <= 7){
             shouldShowAlert = true
         }
         if (!callNameSet) {
-            if !VoxeetSDK.shared.conference.users.filter({ $0.asStream }).isEmpty {
-                self.callNameLabel.text = VoxeetSDK.shared.conference.alias
+            if let endIndex = VoxeetSDK.shared.conference.alias?.firstIndex(of: ":") {
+                self.callNameLabel.text = String(VoxeetSDK.shared.conference.alias![..<endIndex])
                 callNameSet = true
             }
         }
