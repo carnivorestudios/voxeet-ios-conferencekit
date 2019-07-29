@@ -316,7 +316,7 @@ class VCKViewController: UIViewController {
             
             if self.cameraButton.tag == 0 {
                 self.cameraButton.tag = 1
-                cameraImage.image = UIImage(named: "CameraOn")
+                self.cameraImage.image = UIImage(named: "CameraOn")
                 self.cameraButton.backgroundColor = UIColor.white
                 
                 VoxeetSDK.shared.conference.startVideo(userID: userID)
@@ -327,7 +327,7 @@ class VCKViewController: UIViewController {
                 }
             } else {
                 self.cameraButton.tag = 0
-                cameraImage.image = UIImage(named: "CameraOff")
+                self.cameraImage.image = UIImage(named: "CameraOff")
                 self.cameraButton.backgroundColor = UIColor(red:0.14, green:0.14, blue:0.14, alpha:1)
                 VoxeetSDK.shared.conference.stopVideo(userID: userID)
             }
