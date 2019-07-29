@@ -131,7 +131,7 @@
                                                     <action selector="minimizeAction:" destination="vX9-VW-Q3b" eventType="touchUpInside" id="ghN-7m-CH5"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88888888" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="78D-uT-rS5" customClass="NameCallLabel" customModule="VoxeetConferenceKit" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="78D-uT-rS5" customClass="NameCallLabel" customModule="VoxeetConferenceKit" customModuleProvider="target">
                                                 <rect key="frame" x="60" y="0.0" width="294" height="70"/>
                                                 <fontDescription key="fontDescription" name="GujaratiSangamMN" family="Gujarati Sangam MN" pointSize="18"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -241,39 +241,39 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="23r-lc-8zR">
                                         <rect key="frame" x="0.0" y="792" width="414" height="70"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="raF-vO-NxX">
-                                                <rect key="frame" x="89" y="0.0" width="236" height="50"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="raF-vO-NxX">
+                                                <rect key="frame" x="54.5" y="0.0" width="305" height="50"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qOV-eK-MDK" customClass="CircleButton" customModule="VoxeetConferenceKit" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <connections>
                                                             <action selector="switchBuiltInSpeakerAction:" destination="vX9-VW-Q3b" eventType="touchUpInside" id="5La-6l-JCA"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nyn-oN-qfM" customClass="CircleButton" customModule="VoxeetConferenceKit" customModuleProvider="target">
-                                                        <rect key="frame" x="62" y="0.0" width="50" height="50"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <rect key="frame" x="85" y="0.0" width="50" height="50"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <connections>
                                                             <action selector="microphoneAction:" destination="vX9-VW-Q3b" eventType="touchUpInside" id="Hwb-LE-G8D"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYo-2b-Uum" customClass="CircleButton" customModule="VoxeetConferenceKit" customModuleProvider="target">
-                                                        <rect key="frame" x="124" y="0.0" width="50" height="50"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <rect key="frame" x="170" y="0.0" width="50" height="50"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <connections>
                                                             <action selector="cameraAction:" destination="vX9-VW-Q3b" eventType="touchUpInside" id="RXd-pZ-ET1"/>
                                                         </connections>
                                                     </button>
                                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qpK-pq-ETC">
-                                                        <rect key="frame" x="180" y="0.0" width="0.0" height="50"/>
+                                                        <rect key="frame" x="237.5" y="0.0" width="0.0" height="50"/>
                                                         <state key="normal" image="ScreenShareOff"/>
                                                         <connections>
                                                             <action selector="screenShareAction:" destination="vX9-VW-Q3b" eventType="touchUpInside" id="8zG-vP-FhI"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QwX-rF-kVC">
-                                                        <rect key="frame" x="186" y="0.0" width="50" height="50"/>
+                                                        <rect key="frame" x="255" y="0.0" width="50" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="QwX-rF-kVC" secondAttribute="height" multiplier="1:1" id="NHS-9w-oLN"/>
                                                         </constraints>
@@ -287,12 +287,60 @@
                                                     <constraint firstAttribute="height" constant="50" id="P6J-Me-mdL"/>
                                                 </constraints>
                                             </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mute" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYZ-oM-pEE" customClass="buttonTitleLabel" customModule="VoxeetConferenceKit" customModuleProvider="target">
+                                                <rect key="frame" x="139.5" y="55" width="50" height="15"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="jxp-r4-AuI"/>
+                                                    <constraint firstAttribute="height" constant="15" id="qVW-Cv-ox9"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speaker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAB-fB-XMS" customClass="buttonTitleLabel" customModule="VoxeetConferenceKit" customModuleProvider="target">
+                                                <rect key="frame" x="54.5" y="55" width="50" height="15"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="Kzs-MA-xU9"/>
+                                                    <constraint firstAttribute="height" constant="15" id="e9H-Nm-8r5"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zk8-I9-eT7" customClass="buttonTitleLabel" customModule="VoxeetConferenceKit" customModuleProvider="target">
+                                                <rect key="frame" x="224.5" y="55" width="50" height="15"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="15" id="LQH-Kg-fVh"/>
+                                                    <constraint firstAttribute="width" constant="50" id="PHF-xb-PfL"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Call" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2pV-TH-ueR" customClass="buttonTitleLabel" customModule="VoxeetConferenceKit" customModuleProvider="target">
+                                                <rect key="frame" x="309.5" y="55" width="50" height="15"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="15" id="KXn-vI-qqt"/>
+                                                    <constraint firstAttribute="width" constant="50" id="pfJ-fa-9XT"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstItem="2pV-TH-ueR" firstAttribute="top" secondItem="QwX-rF-kVC" secondAttribute="bottom" constant="5" id="12g-Sl-sU5"/>
+                                            <constraint firstItem="dAB-fB-XMS" firstAttribute="centerX" secondItem="qOV-eK-MDK" secondAttribute="centerX" id="2aq-e7-1Ww"/>
                                             <constraint firstItem="raF-vO-NxX" firstAttribute="top" secondItem="23r-lc-8zR" secondAttribute="top" id="AOr-Jf-0gw"/>
+                                            <constraint firstItem="xYZ-oM-pEE" firstAttribute="top" secondItem="Nyn-oN-qfM" secondAttribute="bottom" constant="5" id="FKN-KG-fzs"/>
+                                            <constraint firstItem="2pV-TH-ueR" firstAttribute="centerX" secondItem="QwX-rF-kVC" secondAttribute="centerX" id="TOK-6s-Mh7"/>
+                                            <constraint firstItem="dAB-fB-XMS" firstAttribute="top" secondItem="qOV-eK-MDK" secondAttribute="bottom" constant="5" id="Ujy-57-i5z"/>
                                             <constraint firstAttribute="bottom" secondItem="raF-vO-NxX" secondAttribute="bottom" constant="20" id="VV0-cF-QmA"/>
+                                            <constraint firstItem="zk8-I9-eT7" firstAttribute="centerX" secondItem="YYo-2b-Uum" secondAttribute="centerX" id="Yj6-qN-BU3"/>
                                             <constraint firstItem="raF-vO-NxX" firstAttribute="centerX" secondItem="23r-lc-8zR" secondAttribute="centerX" id="cZQ-uU-HGB"/>
+                                            <constraint firstItem="zk8-I9-eT7" firstAttribute="top" secondItem="YYo-2b-Uum" secondAttribute="bottom" constant="5" id="g6v-A9-bGE"/>
+                                            <constraint firstItem="xYZ-oM-pEE" firstAttribute="centerX" secondItem="Nyn-oN-qfM" secondAttribute="centerX" id="uGG-uv-gU3"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tqV-bw-3TT">
@@ -329,7 +377,7 @@
                                         </constraints>
                                     </view>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MicrophoneOn" translatesAutoresizingMaskIntoConstraints="NO" id="81d-su-1Dw">
-                                        <rect key="frame" x="169" y="808.5" width="14" height="17"/>
+                                        <rect key="frame" x="157.5" y="808.5" width="14" height="17"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="QpN-jt-QmM"/>
@@ -337,14 +385,14 @@
                                         </constraints>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CameraOff" translatesAutoresizingMaskIntoConstraints="NO" id="Kv6-RO-F6K">
-                                        <rect key="frame" x="228" y="810" width="20" height="14"/>
+                                        <rect key="frame" x="239.5" y="810" width="20" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="ft1-r1-th7"/>
                                             <constraint firstAttribute="height" constant="14" id="nFc-pi-ikC"/>
                                         </constraints>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BuiltInSpeakerOn" translatesAutoresizingMaskIntoConstraints="NO" id="fou-JL-Oq8">
-                                        <rect key="frame" x="104" y="810" width="20" height="14"/>
+                                        <rect key="frame" x="69.5" y="810" width="20" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="2ek-Qr-eEr"/>
                                             <constraint firstAttribute="height" constant="14" id="3o0-vI-Xmn"/>
@@ -452,7 +500,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tzl-qo-uLF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-567.20000000000005" y="-155.17241379310346"/>
+            <point key="canvasLocation" x="-568.1159420289855" y="-155.35714285714286"/>
         </scene>
     </scenes>
     <resources>

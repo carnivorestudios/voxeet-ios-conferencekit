@@ -304,7 +304,7 @@ import VoxeetSDK
         let safeArea = safeAreaInsets()
         
         // Generates magnet corner constraints.
-        if vckView.frame.origin.x <= window.frame.width / 2 - vckView.frame.width / 2 {
+        /*if vckView.frame.origin.x <= window.frame.width / 2 - vckView.frame.width / 2 {
             vckVCMinimizeVisualConstraintsHorizontal = "H:|-\(safeArea.left + 10)-[vckView(\(vckView.frame.width))]"
         } else {
             vckVCMinimizeVisualConstraintsHorizontal = "H:[vckView(\(vckView.frame.width))]-\(safeArea.right + 10)-|"
@@ -313,7 +313,7 @@ import VoxeetSDK
             vckVCMinimizeVisualConstraintsVertical = "V:|-\(safeArea.top + 10)-[vckView(\(vckView.frame.height))]"
         } else {
             vckVCMinimizeVisualConstraintsVertical = "V:[vckView(\(vckView.frame.height))]-\(safeArea.bottom + 10)-|"
-        }
+        }*/
         
         vckVCConstraintsHorizontal = NSLayoutConstraint.constraints(withVisualFormat: vckVCMinimizeVisualConstraintsHorizontal, options: [], metrics: nil, views: ["vckView": vckView])
         vckVCConstraintsVertical = NSLayoutConstraint.constraints(withVisualFormat: vckVCMinimizeVisualConstraintsVertical, options: [], metrics: nil, views: ["vckView": vckView])
