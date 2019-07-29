@@ -315,7 +315,7 @@ import VoxeetSDK
             vckVCMinimizeVisualConstraintsVertical = "V:[vckView(\(vckView.frame.height))]-\(safeArea.bottom + 10)-|"
         }*/
         vckVCMinimizeVisualConstraintsHorizontal = "H:|-\(vckView.frame.origin.x)-[vckView(\(vckView.frame.width))]"
-        vckVCMinimizeVisualConstraintsVertical = "V:[vckView(\(vckView.frame.origin.y))]-\(vckView.frame.height)-|"
+        vckVCMinimizeVisualConstraintsVertical = "V:|-\(vckView.frame.origin.y)-[vckView(\(vckView.frame.height))]"
         
         vckVCConstraintsHorizontal = NSLayoutConstraint.constraints(withVisualFormat: vckVCMinimizeVisualConstraintsHorizontal, options: [], metrics: nil, views: ["vckView": vckView])
         vckVCConstraintsVertical = NSLayoutConstraint.constraints(withVisualFormat: vckVCMinimizeVisualConstraintsVertical, options: [], metrics: nil, views: ["vckView": vckView])
