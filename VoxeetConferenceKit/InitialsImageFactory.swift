@@ -13,7 +13,7 @@ class InitialsImageFactory: NSObject {
     
     class func imageWith(initials: String?, user: VTUser?) -> UIImage? {
         
-        let frame = CGRect(x: 0, y: 0, width: 115, height: 115)
+        let frame = CGRect(x: 0, y: 0, width: 200, height: 200)
         let colors:[UIColor] = ["263238".toUIColor(),
                                 "004d40".toUIColor(),
                                 "006064".toUIColor(),

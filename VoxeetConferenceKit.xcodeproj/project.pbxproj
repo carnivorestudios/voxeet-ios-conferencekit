@@ -29,6 +29,7 @@
 		F1340ABB22D9454B008A58AA /* NameCallLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1340ABA22D9454B008A58AA /* NameCallLabel.swift */; };
 		F1340ABD22DD409B008A58AA /* InitialsImageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1340ABC22DD409B008A58AA /* InitialsImageFactory.swift */; };
 		F17C7FF422E6356800273F6A /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17C7FF322E6356800273F6A /* NetworkStatus.swift */; };
+		F1AFB32422EF7B38007E294A /* timerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AFB32322EF7B38007E294A /* timerLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		F1340ABA22D9454B008A58AA /* NameCallLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameCallLabel.swift; sourceTree = "<group>"; };
 		F1340ABC22DD409B008A58AA /* InitialsImageFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialsImageFactory.swift; sourceTree = "<group>"; };
 		F17C7FF322E6356800273F6A /* NetworkStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatus.swift; sourceTree = "<group>"; };
+		F1AFB32322EF7B38007E294A /* timerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timerLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				CC2B28B41E54501E00E3EB57 /* VoxeetConferenceKit.h */,
 				F1340AB822D92E34008A58AA /* CircleButton.swift */,
 				F17C7FF322E6356800273F6A /* NetworkStatus.swift */,
+				F1AFB32322EF7B38007E294A /* timerLabel.swift */,
 				F1340ABC22DD409B008A58AA /* InitialsImageFactory.swift */,
 				F1340ABA22D9454B008A58AA /* NameCallLabel.swift */,
 				CC2B28B51E54501E00E3EB57 /* Info.plist */,
@@ -271,6 +274,7 @@
 				F1340ABB22D9454B008A58AA /* NameCallLabel.swift in Sources */,
 				F1340AB922D92E34008A58AA /* CircleButton.swift in Sources */,
 				CC2B28D21E54522100E3EB57 /* VoxeetConferenceKit.swift in Sources */,
+				F1AFB32422EF7B38007E294A /* timerLabel.swift in Sources */,
 				F17C7FF422E6356800273F6A /* NetworkStatus.swift in Sources */,
 				CC2B290D1E5469C300E3EB57 /* VCKViewController.swift in Sources */,
 				F1340ABD22DD409B008A58AA /* InitialsImageFactory.swift in Sources */,
