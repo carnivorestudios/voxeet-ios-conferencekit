@@ -170,8 +170,7 @@ class VCKViewController: UIViewController {
         // Default behavior to check if video is enabled.
         if VoxeetSDK.shared.conference.defaultVideo {
             cameraButton.tag = 1
-            cameraImage.isHidden = false
-            cameraImage.image = UIImage(named: "CameraOn")
+            cameraImage.image = UIImage(named: "CameraOn", in: Bundle(for: type(of: self)), compatibleWith: nil)
             cameraButton.backgroundColor = UIColor.white
         }
         // Selfie camera mirror.
@@ -302,8 +301,7 @@ class VCKViewController: UIViewController {
     @IBAction func microphoneAction(_ sender: Any) {
         if let userID = VoxeetSDK.shared.session.user?.id {
             let isMuted = VoxeetSDK.shared.conference.toggleMute(userID: userID)
-            microphoneImage.isHidden = false
-            microphoneImage.image = UIImage(named: isMuted ? "MicrophoneOff" : "MicrophoneOn")
+            microphoneImage.image = UIImage(named: isMuted ? "MicrophoneOff" : "MicrophoneOn", in: Bundle(for: type(of: self)), compatibleWith: nil)
             if (isMuted) {
                 microphoneButton.backgroundColor = UIColor.white
             } else {
@@ -318,8 +316,7 @@ class VCKViewController: UIViewController {
             
             if self.cameraButton.tag == 0 {
                 self.cameraButton.tag = 1
-                self.cameraImage.isHidden = false
-                self.cameraImage.image = UIImage(named: "CameraOn")
+                self.cameraImage.image = UIImage(named: "CameraOn", in: Bundle(for: type(of: self)), compatibleWith: nil)
                 self.cameraButton.backgroundColor = UIColor.white
                 
                 VoxeetSDK.shared.conference.startVideo(userID: userID)
@@ -330,8 +327,7 @@ class VCKViewController: UIViewController {
                 }
             } else {
                 self.cameraButton.tag = 0
-                self.cameraImage.isHidden = false
-                self.cameraImage.image = UIImage(named: "CameraOff")
+                self.cameraImage.image = UIImage(named: "CameraOff", in: Bundle(for: type(of: self)), compatibleWith: nil)
                 self.cameraButton.backgroundColor = UIColor(red:0.14, green:0.14, blue:0.14, alpha:1)
                 VoxeetSDK.shared.conference.stopVideo(userID: userID)
             }
@@ -341,13 +337,11 @@ class VCKViewController: UIViewController {
     @IBAction func switchBuiltInSpeakerAction(_ sender: Any? = nil) {
         if switchBuiltInSpeakerButton.tag == 0 {
             switchBuiltInSpeakerButton.tag = 1
-            speakerImage.isHidden = false
-            speakerImage.image = UIImage(named: "BuiltInSpeakerOff")
+            speakerImage.image = UIImage(named: "BuiltInSpeakerOff", in: Bundle(for: type(of: self)), compatibleWith: nil)
             switchBuiltInSpeakerButton.backgroundColor = UIColor(red:0.14, green:0.14, blue:0.14, alpha:1)
         } else {
             switchBuiltInSpeakerButton.tag = 0
-            speakerImage.isHidden = false
-            speakerImage.image = UIImage(named: "BuiltInSpeakerOn")
+            speakerImage.image = UIImage(named: "BuiltInSpeakerOn", in: Bundle(for: type(of: self)), compatibleWith: nil)
             switchBuiltInSpeakerButton.backgroundColor = UIColor.white
         }
         
@@ -679,17 +673,14 @@ class VCKViewController: UIViewController {
                 
                 if output?.portType == .builtInSpeaker {
                     self.switchBuiltInSpeakerButton.tag = 0
-                    self.speakerImage.isHidden = false
-                    self.speakerImage.image = UIImage(named: "BuiltInSpeakerOn")
+                    self.speakerImage.image = UIImage(named: "BuiltInSpeakerOn", in: Bundle(for: type(of: self)), compatibleWith: nil)
                 } else {
                     self.switchBuiltInSpeakerButton.tag = 1
-                    self.speakerImage.isHidden = false
-                    self.speakerImage.image = UIImage(named: "BuiltInSpeakerOff")
+                    self.speakerImage.image = UIImage(named: "BuiltInSpeakerOff", in: Bundle(for: type(of: self)), compatibleWith: nil)
                 }
             } else {
                 self.switchBuiltInSpeakerButton.isEnabled = false
-                self.speakerImage.isHidden = false
-                self.speakerImage.image = UIImage(named: "BuiltInSpeakerOff")
+                self.speakerImage.image = UIImage(named: "BuiltInSpeakerOff", in: Bundle(for: type(of: self)), compatibleWith: nil)
             }
         }
     }
@@ -709,8 +700,7 @@ class VCKViewController: UIViewController {
     
     @objc private func callKitMuteToggled(notification: NSNotification) {
         guard let isMuted = notification.userInfo?["mute"] as? Bool else { return }
-        microphoneImage.isHidden = false
-        microphoneImage.image = UIImage(named: isMuted ? "MicrophoneOff" : "MicrophoneOn")
+        microphoneImage.image = UIImage(named: isMuted ? "MicrophoneOff" : "MicrophoneOn", in: Bundle(for: type(of: self)), compatibleWith: nil)
 
     }
 }
