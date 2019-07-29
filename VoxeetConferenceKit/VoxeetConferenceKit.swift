@@ -314,21 +314,8 @@ import VoxeetSDK
         } else {
             vckVCMinimizeVisualConstraintsVertical = "V:[vckView(\(vckView.frame.height))]-\(safeArea.bottom + 10)-|"
         }*/
-        if (vckView.frame.origin.x < window.frame.width && vckView.frame.origin.x > 0 && vckView.frame.origin.y < window.frame.height && vckView.frame.origin.y > 0) {
-            vckVCMinimizeVisualConstraintsHorizontal = "H:|-\(vckView.frame.origin.x)-[vckView(\(vckView.frame.width))]"
-            vckVCMinimizeVisualConstraintsVertical = "V:[vckView(\(vckView.frame.origin.y))]-\(vckView.frame.height)-|"
-        } else {
-            if vckView.frame.origin.x <= window.frame.width / 2 - vckView.frame.width / 2 {
-                vckVCMinimizeVisualConstraintsHorizontal = "H:|-\(safeArea.left + 10)-[vckView(\(vckView.frame.width))]"
-            } else {
-                vckVCMinimizeVisualConstraintsHorizontal = "H:[vckView(\(vckView.frame.width))]-\(safeArea.right + 10)-|"
-            }
-            if vckView.frame.origin.y <= window.frame.height / 2 - vckView.frame.height / 2 || keyboardOpenned {
-                vckVCMinimizeVisualConstraintsVertical = "V:|-\(safeArea.top + 10)-[vckView(\(vckView.frame.height))]"
-            } else {
-                vckVCMinimizeVisualConstraintsVertical = "V:[vckView(\(vckView.frame.height))]-\(safeArea.bottom + 10)-|"
-            }
-        }
+        vckVCMinimizeVisualConstraintsHorizontal = "H:|-\(vckView.frame.origin.x)-[vckView(\(vckView.frame.width))]"
+        vckVCMinimizeVisualConstraintsVertical = "V:[vckView(\(vckView.frame.origin.y))]-\(vckView.frame.height)-|"
         
         vckVCConstraintsHorizontal = NSLayoutConstraint.constraints(withVisualFormat: vckVCMinimizeVisualConstraintsHorizontal, options: [], metrics: nil, views: ["vckView": vckView])
         vckVCConstraintsVertical = NSLayoutConstraint.constraints(withVisualFormat: vckVCMinimizeVisualConstraintsVertical, options: [], metrics: nil, views: ["vckView": vckView])
