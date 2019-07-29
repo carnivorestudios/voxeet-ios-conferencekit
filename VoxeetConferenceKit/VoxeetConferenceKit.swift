@@ -314,8 +314,10 @@ import VoxeetSDK
         } else {
             vckVCMinimizeVisualConstraintsVertical = "V:[vckView(\(vckView.frame.height))]-\(safeArea.bottom + 10)-|"
         }*/
-        vckVCMinimizeVisualConstraintsHorizontal = "H:|-\(vckView.frame.origin.x)-[vckView(\(vckView.frame.width))]"
-        vckVCMinimizeVisualConstraintsVertical = "V:|-\(vckView.frame.origin.y)-[vckView(\(vckView.frame.height))]"
+        if (vckView.frame.origin.x > 0 && vckView.frame.origin.x + vckView.frame.width < window.frame.width && vckView.frame.origin.y > 0 && vckView.frame.origin.y + vckView.frame.height < window.frame.height) {
+            vckVCMinimizeVisualConstraintsHorizontal = "H:|-\(vckView.frame.origin.x)-[vckView(\(vckView.frame.width))]"
+            vckVCMinimizeVisualConstraintsVertical = "V:|-\(vckView.frame.origin.y)-[vckView(\(vckView.frame.height))]"
+        }
         
         vckVCConstraintsHorizontal = NSLayoutConstraint.constraints(withVisualFormat: vckVCMinimizeVisualConstraintsHorizontal, options: [], metrics: nil, views: ["vckView": vckView])
         vckVCConstraintsVertical = NSLayoutConstraint.constraints(withVisualFormat: vckVCMinimizeVisualConstraintsVertical, options: [], metrics: nil, views: ["vckView": vckView])
