@@ -291,7 +291,7 @@ class VCKViewController: UIViewController {
         usersCollectionView.isHidden = minimized ? true : false
         usersCollectionView.isUserInteractionEnabled = minimized ? false : true
         timerConstraint.constant = minimized ? -35 : 24
-        conferenceTimerLabel.font.pointSize = minimized ? 12 : 14
+        conferenceTimerLabel.font = conferenceTimerLabel.font.withSize(minimized ? 12 : 14)
         if cameraButton.tag != 0 {
             ownVideoRenderer.alpha = minimized ? 0 : 1
             flipImage.alpha = minimized ? 0 : 1
