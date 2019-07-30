@@ -46,7 +46,7 @@ class VCKViewController: UIViewController {
     @IBOutlet weak var microphoneImage: UIImageView!
     @IBOutlet weak var cameraImage: UIImageView!
     @IBOutlet weak var speakerImage: UIImageView!
-    @IBOutlet weak var timerConstraint: NSLayoutConstraint!
+    @IBOutlet var timerConstraint: NSLayoutConstraint!
     
     /* Stored */
     
@@ -291,7 +291,6 @@ class VCKViewController: UIViewController {
         } else {
             let margins = view.layoutMarginsGuide
             conferenceTimerContainerView.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: 20).isActive = false
-            view.addSubview(conferenceTimerContainerView)
             timerConstraint.isActive = true
         }
         if cameraButton.tag != 0 {
