@@ -47,6 +47,10 @@ class VCKViewController: UIViewController {
     @IBOutlet weak var cameraImage: UIImageView!
     @IBOutlet weak var speakerImage: UIImageView!
     @IBOutlet var timerConstraint: NSLayoutConstraint!
+    @IBOutlet weak var speakerLabel: buttonTitleLabel!
+    @IBOutlet weak var muteLabel: buttonTitleLabel!
+    @IBOutlet weak var videoLabel: buttonTitleLabel!
+    @IBOutlet weak var endCallLabel: buttonTitleLabel!
     
     /* Stored */
     
@@ -112,6 +116,7 @@ class VCKViewController: UIViewController {
         // Hide switch speaker button on other device than iPhone.
         if UIDevice.current.userInterfaceIdiom != .phone {
             switchBuiltInSpeakerButton.isHidden = true
+            speakerLabel.isHidden = true
             speakerImage.isHidden = true
         }
         
@@ -211,8 +216,10 @@ class VCKViewController: UIViewController {
             UIView.animate(withDuration: 0.25) {
                 self.microphoneButton.isHidden = true
                 self.microphoneImage.isHidden = true
+                self.muteLabel.isHidden = true
                 self.cameraButton.isHidden = true
                 self.cameraImage.isHidden = true
+                self.videoLabel.isHidden = true
                 self.screenShareButton.isHidden = true
             }
             cameraButton.tag = 0
@@ -284,6 +291,7 @@ class VCKViewController: UIViewController {
         usersCollectionView.isHidden = minimized ? true : false
         usersCollectionView.isUserInteractionEnabled = minimized ? false : true
         timerConstraint.constant = minimized ? -35 : 24
+        conferenceTimerLabel.font.pointSize = minimized ? 12 : 14
         if cameraButton.tag != 0 {
             ownVideoRenderer.alpha = minimized ? 0 : 1
             flipImage.alpha = minimized ? 0 : 1
@@ -557,7 +565,7 @@ class VCKViewController: UIViewController {
         DispatchQueue.main.async {
             if (!self.callNameSet) {
                 if let endIndex = VoxeetSDK.shared.conference.alias?.firstIndex(of: ":") {
-                    self.callNameLabel.text = String(VoxeetSDK.shared.conference.alias![..<endIndex])
+                    self.callNameLabel.text = String(VoxeetSDK.shared.conference.alias![..<endIndex]).replacingOccurrences(of: "*", with: " ")
                     self.callNameSet = true
                 }
             }
