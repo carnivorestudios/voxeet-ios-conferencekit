@@ -60,7 +60,7 @@ class InitialsImageFactory: NSObject {
         nameLabel.layer.borderColor = UIColor.white.cgColor
         nameLabel.layer.cornerRadius = frame.size.width/2
         nameLabel.textColor = .white
-        nameLabel.font = UIFont(name: "Poppins-SemiBold", size: 36)
+        nameLabel.font = UIFont(name: "Poppins-SemiBold", size: 50)
         
         nameLabel.text = initials
         UIGraphicsBeginImageContext(frame.size)
