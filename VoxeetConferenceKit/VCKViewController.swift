@@ -287,10 +287,10 @@ class VCKViewController: UIViewController {
         if (minimized) {
             timerConstraint.isActive = false
             let margins = view.layoutMarginsGuide
-            conferenceTimerContainerView.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: 20).isActive = true
+            conferenceTimerContainerView.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -10).isActive = true
         } else {
             let margins = view.layoutMarginsGuide
-            conferenceTimerContainerView.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: 20).isActive = false
+            conferenceTimerContainerView.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -10).isActive = false
             timerConstraint.isActive = true
         }
         if cameraButton.tag != 0 {
