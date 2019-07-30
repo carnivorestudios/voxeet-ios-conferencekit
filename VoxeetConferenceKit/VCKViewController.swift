@@ -289,8 +289,7 @@ class VCKViewController: UIViewController {
             let margins = view.layoutMarginsGuide
             conferenceTimerContainerView.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -10).isActive = true
         } else {
-            let margins = view.layoutMarginsGuide
-            conferenceTimerContainerView.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -10).isActive = false
+            conferenceTimerContainerView.constraints.removeAll()
             timerConstraint.isActive = true
         }
         if cameraButton.tag != 0 {
