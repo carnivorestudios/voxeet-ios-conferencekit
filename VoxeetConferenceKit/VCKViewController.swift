@@ -282,6 +282,7 @@ class VCKViewController: UIViewController {
         conferenceTimerContainerView.alpha = 1
         mainAvatarLabel.alpha = minimized ? 0 : 1
         usersCollectionView.alpha = minimized ? 0 : 1
+        usersCollectionView.isUserInteractionEnabled = minimized ? false : true
         
         if (minimized) {
             timerConstraint.isActive = false
@@ -290,6 +291,7 @@ class VCKViewController: UIViewController {
         } else {
             let margins = view.layoutMarginsGuide
             conferenceTimerContainerView.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: 20).isActive = false
+            view.addSubview(conferenceTimerContainerView)
             timerConstraint.isActive = true
         }
         if cameraButton.tag != 0 {
