@@ -285,12 +285,9 @@ class VCKViewController: UIViewController {
         usersCollectionView.isUserInteractionEnabled = minimized ? false : true
         
         if (minimized) {
-            timerConstraint.isActive = false
-            let margins = view.layoutMarginsGuide
-            conferenceTimerContainerView.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -10).isActive = true
+            timerConstraint.constant = -100
         } else {
-            conferenceTimerContainerView.constraints.removeAll()
-            timerConstraint.isActive = true
+            timerConstraint.constant = 24
         }
         if cameraButton.tag != 0 {
             ownVideoRenderer.alpha = minimized ? 0 : 1
