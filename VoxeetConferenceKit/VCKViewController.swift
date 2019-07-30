@@ -285,7 +285,7 @@ class VCKViewController: UIViewController {
         usersCollectionView.isUserInteractionEnabled = minimized ? false : true
         
         if (minimized) {
-            timerConstraint.constant = -100
+            timerConstraint.constant = -50
         } else {
             timerConstraint.constant = 24
         }
