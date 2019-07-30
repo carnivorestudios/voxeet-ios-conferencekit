@@ -46,6 +46,7 @@ class VCKViewController: UIViewController {
     @IBOutlet weak var microphoneImage: UIImageView!
     @IBOutlet weak var cameraImage: UIImageView!
     @IBOutlet weak var speakerImage: UIImageView!
+    @IBOutlet weak var timerConstraint: NSLayoutConstraint!
     
     /* Stored */
     
@@ -280,7 +281,17 @@ class VCKViewController: UIViewController {
         bottomContainerView.alpha = minimized ? 0 : 1
         conferenceTimerContainerView.alpha = 1
         mainAvatarLabel.alpha = minimized ? 0 : 1
+        usersCollectionView.alpha = minimized ? 0 : 1
         
+        if (minimized) {
+            timerConstraint.isActive = false
+            let margins = view.layoutMarginsGuide
+            conferenceTimerContainerView.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: 20).isActive = true
+        } else {
+            let margins = view.layoutMarginsGuide
+            conferenceTimerContainerView.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: 20).isActive = false
+            timerConstraint.isActive = true
+        }
         if cameraButton.tag != 0 {
             ownVideoRenderer.alpha = minimized ? 0 : 1
             flipImage.alpha = minimized ? 0 : 1

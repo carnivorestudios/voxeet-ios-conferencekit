@@ -489,6 +489,7 @@
                         <outlet property="screenShareVideoRenderer" destination="cxf-fH-dED" id="u5w-Dw-YG0"/>
                         <outlet property="speakerImage" destination="fou-JL-Oq8" id="ViL-iS-vmD"/>
                         <outlet property="switchBuiltInSpeakerButton" destination="qOV-eK-MDK" id="iaz-fC-hdR"/>
+                        <outlet property="timerConstraint" destination="syJ-lh-Y5N" id="LNX-lP-Xdh"/>
                         <outlet property="topView" destination="PGP-Xx-ODc" id="Q5g-R2-c4A"/>
                         <outlet property="usersCollectionView" destination="nad-OH-Mb0" id="Wa2-WM-9xd"/>
                         <outlet property="voiceIndicatorConstraintLeading" destination="bnX-l2-Ote" id="cEZ-Ir-PzK"/>
