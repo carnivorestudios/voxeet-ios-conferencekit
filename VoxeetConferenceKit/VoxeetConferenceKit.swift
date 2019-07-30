@@ -422,8 +422,8 @@ extension VoxeetConferenceKit {
         case .disconnecting:
             // Update conference state label.
             if vckVC?.conferenceStateLabel.text == nil {
-                vckVC?.conferenceStateLabel.font = UIFont(name: "Poppins-Bold", size: 24)
                 vckVC?.conferenceStateLabel.text = NSLocalizedString("CONFERENCE_STATE_ENDED", bundle: Bundle(for: type(of: self)), comment: "")
+                vckVC?.conferenceStateLabel.font = UIFont(name: "Poppins-Bold", size: 24)
             }
             vckVC?.conferenceStartTimer?.invalidate()
             vckVC?.conferenceStateLabel.isHidden = false
