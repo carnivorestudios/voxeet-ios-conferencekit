@@ -281,14 +281,9 @@ class VCKViewController: UIViewController {
         bottomContainerView.alpha = minimized ? 0 : 1
         conferenceTimerContainerView.alpha = 1
         mainAvatarLabel.alpha = minimized ? 0 : 1
-        usersCollectionView.alpha = minimized ? 0 : 1
+        usersCollectionView.isHidden = minimized ? false : true
         usersCollectionView.isUserInteractionEnabled = minimized ? false : true
-        
-        if (minimized) {
-            timerConstraint.constant = -50
-        } else {
-            timerConstraint.constant = 24
-        }
+        timerConstraint.constant = minimized ? -35 : 24
         if cameraButton.tag != 0 {
             ownVideoRenderer.alpha = minimized ? 0 : 1
             flipImage.alpha = minimized ? 0 : 1
