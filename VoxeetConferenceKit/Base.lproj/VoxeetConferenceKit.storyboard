@@ -20,7 +20,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3iM-co-lTt">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" red="0.070588235294117646" green="0.070588235294117646" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W21-R7-Fb1">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -40,7 +40,7 @@
                                     </view>
                                     <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cxf-fH-dED" customClass="VTVideoView" customModule="VoxeetSDK">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="contentFill" value="NO"/>
                                         </userDefinedRuntimeAttributes>
@@ -314,8 +314,8 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leave Call" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2pV-TH-ueR" customClass="buttonTitleLabel" customModule="VoxeetConferenceKit" customModuleProvider="target">
-                                                <rect key="frame" x="300.33333333333331" y="55" width="53.666666666666686" height="15"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Call" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2pV-TH-ueR" customClass="buttonTitleLabel" customModule="VoxeetConferenceKit" customModuleProvider="target">
+                                                <rect key="frame" x="305.66666666666669" y="55" width="43" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="KXn-vI-qqt"/>
                                                 </constraints>
@@ -395,7 +395,7 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="zwJ-PR-ChP" secondAttribute="trailing" constant="6" id="2Me-vf-GDu"/>
                                     <constraint firstItem="tQ0-6z-RFh" firstAttribute="centerY" secondItem="W21-R7-Fb1" secondAttribute="centerY" priority="250" constant="-26" id="2Zz-yt-WAC"/>
