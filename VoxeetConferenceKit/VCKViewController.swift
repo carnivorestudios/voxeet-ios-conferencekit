@@ -444,7 +444,7 @@ class VCKViewController: UIViewController {
         }
         
         ownVideoRenderer.subviews.first?.alpha = 0
-        VoxeetSDK.shared.conference.flipCamera {
+        VoxeetSDK.shared.conference.switchCamera {
             DispatchQueue.main.async {
                 UIView.animate(withDuration: 0.10, animations: {
                     self.ownVideoRenderer.subviews.first?.alpha = 1

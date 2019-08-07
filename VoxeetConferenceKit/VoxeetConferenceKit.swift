@@ -480,7 +480,21 @@ extension VoxeetConferenceKit {
         
         // Update minimized constraints.
         window.removeConstraints(vckVCConstraintsHorizontal + vckVCConstraintsVertical)
-        generateMinimizeConstraints()
+        let safeArea = safeAreaInsets()
+        
+        // Generates magnet corner constraints.
+        if vckView.frame.origin.x <= window.frame.width / 2 - vckView.frame.width / 2 {
+         vckVCMinimizeVisualConstraintsHorizontal = "H:|-\(safeArea.left + 10)-[vckView(\(vckView.frame.width))]"
+         } else {
+         vckVCMinimizeVisualConstraintsHorizontal = "H:[vckView(\(vckView.frame.width))]-\(safeArea.right + 10)-|"
+         }
+         if vckView.frame.origin.y <= window.frame.height / 2 - vckView.frame.height / 2 || keyboardOpenned {
+         vckVCMinimizeVisualConstraintsVertical = "V:|-\(safeArea.top + 10)-[vckView(\(vckView.frame.height))]"
+         } else {
+         vckVCMinimizeVisualConstraintsVertical = "V:[vckView(\(vckView.frame.height))]-\(safeArea.bottom + 10)-|"
+         }
+        vckVCConstraintsHorizontal = NSLayoutConstraint.constraints(withVisualFormat: vckVCMinimizeVisualConstraintsHorizontal, options: [], metrics: nil, views: ["vckView": vckView])
+        vckVCConstraintsVertical = NSLayoutConstraint.constraints(withVisualFormat: vckVCMinimizeVisualConstraintsVertical, options: [], metrics: nil, views: ["vckView": vckView])
         window.addConstraints(vckVCConstraintsHorizontal + vckVCConstraintsVertical)
         window.layoutIfNeeded()
     }
