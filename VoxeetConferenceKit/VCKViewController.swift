@@ -637,7 +637,6 @@ class VCKViewController: UIViewController {
             if let screenStream = screenStream, userID == screenShareUserID {
                 mainVideoRenderer.isHidden = true
                 screenShareVideoRenderer.isHidden = false
-                VoxeetSDK.shared.conference.attachMediaStream(screenStream, renderer: screenShareVideoRenderer)
             } else if let stream = stream {
                 mainVideoRenderer.isHidden = false
                 screenShareVideoRenderer.isHidden = true
