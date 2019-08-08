@@ -46,6 +46,7 @@ class VCKViewController: UIViewController {
     @IBOutlet weak var microphoneImage: UIImageView!
     @IBOutlet weak var cameraImage: UIImageView!
     @IBOutlet weak var speakerImage: UIImageView!
+    @IBOutlet weak var screenShareImage: UIImageView!
     @IBOutlet var timerConstraint: NSLayoutConstraint!
     @IBOutlet weak var speakerLabel: buttonTitleLabel!
     @IBOutlet weak var muteLabel: buttonTitleLabel!
@@ -187,6 +188,7 @@ class VCKViewController: UIViewController {
         // Hide screen share button for devices below iOS 11.
         if #available(iOS 11.0, *) {} else {
             screenShareButton.isHidden = true
+            screenShareImage.isHidden = true
         }
         
         // Disable automatic screen lock.
@@ -214,6 +216,7 @@ class VCKViewController: UIViewController {
                 self.cameraButton.alpha = 0
                 self.cameraImage.alpha = 0
                 self.screenShareButton.alpha = 0
+                self.screenShareImage.alpha = 0
             }
             UIView.animate(withDuration: 0.25) {
                 self.microphoneButton.isHidden = true
@@ -223,6 +226,7 @@ class VCKViewController: UIViewController {
                 self.cameraImage.isHidden = true
                 self.videoLabel.isHidden = true
                 self.screenShareButton.isHidden = true
+                self.screenShareImage.isHidden = true
             }
             cameraButton.tag = 0
         }
@@ -371,17 +375,17 @@ class VCKViewController: UIViewController {
         if #available(iOS 11.0, *) {
             if screenShareButton.tag == 0 {
                 screenShareButton.tag = 1
-                screenShareButton.setImage(UIImage(named: "ScreenShareOn", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
+                screenShareImage.image = UIImage(named: "ScreenShareOn", in: Bundle(for: type(of: self)), compatibleWith: nil)
                 
                 VoxeetSDK.shared.conference.startScreenShare { (error) in
                     if let _ = error {
-                        self.screenShareButton.setImage(UIImage(named: "ScreenShareOff", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
+                        self.screenShareImage.image = UIImage(named: "ScreenShareOff", in: Bundle(for: type(of: self)), compatibleWith: nil)
                         return
                     }
                 }
             } else {
                 screenShareButton.tag = 0
-                screenShareButton.setImage(UIImage(named: "ScreenShareOff", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
+                screenShareImage.image = UIImage(named: "ScreenShareOff", in: Bundle(for: type(of: self)), compatibleWith: nil)
                 
                 VoxeetSDK.shared.conference.stopScreenShare { (error) in
                     if let _ = error {
