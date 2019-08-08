@@ -20,7 +20,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3iM-co-lTt">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W21-R7-Fb1">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -98,10 +98,10 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Flip" translatesAutoresizingMaskIntoConstraints="NO" id="8eR-7d-qYr">
-                                        <rect key="frame" x="59" y="675" width="20" height="20"/>
+                                        <rect key="frame" x="62" y="749" width="15" height="15"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="20" id="WI4-cE-CTK"/>
-                                            <constraint firstAttribute="height" constant="20" id="bJl-VJ-Dxe"/>
+                                            <constraint firstAttribute="width" constant="15" id="WI4-cE-CTK"/>
+                                            <constraint firstAttribute="height" constant="15" id="bJl-VJ-Dxe"/>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PGP-Xx-ODc">
@@ -400,6 +400,7 @@
                                     <constraint firstAttribute="trailing" secondItem="zwJ-PR-ChP" secondAttribute="trailing" constant="6" id="2Me-vf-GDu"/>
                                     <constraint firstItem="tQ0-6z-RFh" firstAttribute="centerY" secondItem="W21-R7-Fb1" secondAttribute="centerY" priority="250" constant="-26" id="2Zz-yt-WAC"/>
                                     <constraint firstItem="tQ0-6z-RFh" firstAttribute="top" relation="greaterThanOrEqual" secondItem="nad-OH-Mb0" secondAttribute="bottom" id="4FE-oc-RUu"/>
+                                    <constraint firstItem="waJ-1t-Np3" firstAttribute="bottom" secondItem="8eR-7d-qYr" secondAttribute="bottom" constant="5" id="8Qr-Kf-oNA"/>
                                     <constraint firstItem="nad-OH-Mb0" firstAttribute="leading" secondItem="W21-R7-Fb1" secondAttribute="leading" id="9di-23-MRe"/>
                                     <constraint firstItem="tQ0-6z-RFh" firstAttribute="centerX" secondItem="W21-R7-Fb1" secondAttribute="centerX" id="AqZ-yR-Mrp"/>
                                     <constraint firstItem="qOk-Iu-Y79" firstAttribute="leading" secondItem="W21-R7-Fb1" secondAttribute="leading" id="G6S-Uc-91h"/>
@@ -407,7 +408,6 @@
                                     <constraint firstItem="cxf-fH-dED" firstAttribute="top" secondItem="W21-R7-Fb1" secondAttribute="top" id="GWH-K2-PJl"/>
                                     <constraint firstAttribute="trailing" secondItem="tqV-bw-3TT" secondAttribute="trailing" id="HbV-pM-DD6"/>
                                     <constraint firstAttribute="trailing" secondItem="cxf-fH-dED" secondAttribute="trailing" id="K90-As-H0b"/>
-                                    <constraint firstItem="8eR-7d-qYr" firstAttribute="top" secondItem="waJ-1t-Np3" secondAttribute="top" constant="3" id="Of6-Fa-bpn"/>
                                     <constraint firstItem="zwJ-PR-ChP" firstAttribute="leading" secondItem="W21-R7-Fb1" secondAttribute="leading" constant="6" id="P6x-YJ-PaV"/>
                                     <constraint firstItem="tQ0-6z-RFh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="W21-R7-Fb1" secondAttribute="leading" constant="5" id="PYW-jJ-3Dj"/>
                                     <constraint firstAttribute="bottom" secondItem="qOk-Iu-Y79" secondAttribute="bottom" id="PbG-9z-QKI"/>
@@ -429,7 +429,7 @@
                                     <constraint firstItem="qOk-Iu-Y79" firstAttribute="top" secondItem="W21-R7-Fb1" secondAttribute="top" id="tkJ-Rq-R0H"/>
                                     <constraint firstItem="nad-OH-Mb0" firstAttribute="top" secondItem="PGP-Xx-ODc" secondAttribute="bottom" id="uMl-ad-nM4"/>
                                     <constraint firstItem="cxf-fH-dED" firstAttribute="leading" secondItem="W21-R7-Fb1" secondAttribute="leading" id="wQo-4K-cq8"/>
-                                    <constraint firstItem="waJ-1t-Np3" firstAttribute="trailing" secondItem="8eR-7d-qYr" secondAttribute="trailing" constant="3" id="wVZ-bN-sq0"/>
+                                    <constraint firstItem="waJ-1t-Np3" firstAttribute="trailing" secondItem="8eR-7d-qYr" secondAttribute="trailing" constant="5" id="wVZ-bN-sq0"/>
                                     <constraint firstItem="fou-JL-Oq8" firstAttribute="centerX" secondItem="qOV-eK-MDK" secondAttribute="centerX" id="yrh-5A-Qxz"/>
                                 </constraints>
                             </view>
@@ -507,7 +507,7 @@
     <resources>
         <image name="BuiltInSpeakerOn" width="60" height="42"/>
         <image name="CameraOff" width="60" height="42"/>
-        <image name="Flip" width="27" height="31"/>
+        <image name="Flip" width="45" height="45"/>
         <image name="Hangup" width="60" height="60"/>
         <image name="LiveIndicator" width="16" height="16"/>
         <image name="MicrophoneOn" width="42" height="60"/>

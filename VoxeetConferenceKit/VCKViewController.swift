@@ -106,7 +106,7 @@ class VCKViewController: UIViewController {
         mainVideoRenderer.addGestureRecognizer(pinch)
         
         // Sounds set up.
-        if let outgoingSoundURL = Bundle(for: type(of: self)).url(forResource: "CallOutgoing", withExtension: "mp3") {
+        if let outgoingSoundURL = Bundle(for: type(of: self)).url(forResource: "CHQring", withExtension: "mp3") {
             outgoingSound = try? AVAudioPlayer(contentsOf: outgoingSoundURL, fileTypeHint: AVFileType.mp3.rawValue)
             outgoingSound?.numberOfLoops = 3
         }
@@ -127,6 +127,7 @@ class VCKViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(participantAddedNotification), name: .VTParticipantAdded, object: nil)
         // CallKit mute behaviour to update UI observer.
         NotificationCenter.default.addObserver(self, selector: #selector(callKitMuteToggled), name: .VTCallKitMuteToggled, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didEnterBackgroundNotification), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -713,5 +714,12 @@ class VCKViewController: UIViewController {
         guard let isMuted = notification.userInfo?["mute"] as? Bool else { return }
         microphoneImage.image = UIImage(named: isMuted ? "MicrophoneOff" : "MicrophoneOn", in: Bundle(for: type(of: self)), compatibleWith: nil)
 
+    }
+    
+    @objc private func didEnterBackgroundNotification() {
+        if #available(iOS 11.0, *), self.screenShareButton.tag == 1 {
+            VoxeetSDK.shared.conference.startScreenShare { _ in
+            }
+        }
     }
 }

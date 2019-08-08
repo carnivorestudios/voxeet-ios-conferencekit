@@ -35,8 +35,8 @@ import VoxeetSDK
     
     // Conference's viewController properties.
     private var vckVC: VCKViewController?
-    private let vckVCMaximizeBgColor = UIColor.black
-    private let vckVCMinimizeBgColor = UIColor.black
+    private let vckVCMaximizeBgColor = UIColor(red:0.07, green:0.07, blue:0.07, alpha:1)
+    private let vckVCMinimizeBgColor = UIColor(red:0.07, green:0.07, blue:0.07, alpha:1)
     private let vckVCMinimizeSize = CGSize(width: 98, height: 130)
     private var vckVCConstraintsHorizontal = [NSLayoutConstraint]()
     private var vckVCConstraintsVertical = [NSLayoutConstraint]()
