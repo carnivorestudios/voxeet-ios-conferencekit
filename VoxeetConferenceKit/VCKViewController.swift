@@ -20,7 +20,7 @@ class VCKViewController: UIViewController {
     
     @IBOutlet weak var mainVideoRenderer: VTVideoView!
     @IBOutlet weak var ownVideoRenderer: VTVideoView!
-    @IBOutlet weak private var screenShareVideoRenderer: VTVideoView!
+    @IBOutlet weak var screenShareVideoRenderer: VTVideoView!
     
     @IBOutlet weak private var conferenceTimerContainerView: UIView!
     @IBOutlet weak private var conferenceTimerLabel: UILabel!
@@ -73,6 +73,7 @@ class VCKViewController: UIViewController {
     private var hangUpSound: AVAudioPlayer?
     var callNameSet = false
     var shouldShowAlert = true
+    var speakerVideoContentFill = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -636,8 +637,7 @@ class VCKViewController: UIViewController {
             if let screenStream = screenStream, userID == screenShareUserID {
                 mainVideoRenderer.isHidden = true
                 screenShareVideoRenderer.isHidden = false
-                screenShareVideoRenderer.attach(userID: userID!, stream: screenStream)
-                //VoxeetSDK.shared.conference.attachMediaStream(screenStream, renderer: screenShareVideoRenderer)
+                VoxeetSDK.shared.conference.attachMediaStream(screenStream, renderer: screenShareVideoRenderer)
             } else if let stream = stream {
                 mainVideoRenderer.isHidden = false
                 screenShareVideoRenderer.isHidden = true

@@ -99,17 +99,38 @@ extension VCKViewController: VTConferenceDelegate {
     func messageReceived(userID: String, message: String) {}
     
     func screenShareStarted(userID: String, stream: MediaStream) {
-        screenShareUserID = userID
+        if userID == VoxeetSDK.shared.session.user?.id { return }
+        let user = VoxeetSDK.shared.conference.user(userID: userID)
         
         // Re-update the current main user to enable / disable a video stream.
         updateMainUser(user: mainUser)
+        
+        if !stream.videoTracks.isEmpty {
+            // Stop active speaker and lock current user.
+            screenShareUserID = userID
+            
+            // Attach screen share stream.
+            speakerVideoContentFill = self.screenShareVideoRenderer.contentFill
+            self.screenShareVideoRenderer.unattach()
+            self.screenShareVideoRenderer.attach(userID: userID, stream: stream)
+            self.screenShareVideoRenderer.contentFill(false, animated: false)
+            self.screenShareVideoRenderer.setNeedsLayout()
+        }
+        
     }
     
     func screenShareStopped(userID: String) {
-        screenShareUserID = nil
+        if userID == VoxeetSDK.shared.session.user?.id { return }
         
         // Re-update the current main user to enable / disable a video stream.
         updateMainUser(user: mainUser)
+        
+        // Unattach screen share stream.
+        self.screenShareVideoRenderer.unattach()
+        self.screenShareVideoRenderer.contentFill(speakerVideoContentFill, animated: false)
+        
+        // Reset active speaker and unlock previous user.
+        screenShareUserID = nil
     }
     
     private func updateUserPosition() {
