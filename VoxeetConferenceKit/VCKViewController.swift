@@ -41,7 +41,7 @@ class VCKViewController: UIViewController {
     @IBOutlet weak private var microphoneButton: CircleButton!
     @IBOutlet weak private var cameraButton: CircleButton!
     @IBOutlet weak private var switchBuiltInSpeakerButton: CircleButton!
-    @IBOutlet weak private var screenShareButton: UIButton!
+    @IBOutlet weak private var screenShareButton: CircleButton!
     @IBOutlet weak private var hangUpButton: UIButton!
     @IBOutlet weak var microphoneImage: UIImageView!
     @IBOutlet weak var cameraImage: UIImageView!
@@ -52,6 +52,8 @@ class VCKViewController: UIViewController {
     @IBOutlet weak var muteLabel: buttonTitleLabel!
     @IBOutlet weak var videoLabel: buttonTitleLabel!
     @IBOutlet weak var endCallLabel: buttonTitleLabel!
+    @IBOutlet weak var shareScreenFirstLine: buttonTitleLabel!
+    @IBOutlet weak var shareScreenSecondLine: buttonTitleLabel!
     
     /* Stored */
     
@@ -174,6 +176,7 @@ class VCKViewController: UIViewController {
         
         cameraButton.backgroundColor = UIColor(red:0.14, green:0.14, blue:0.14, alpha:1)
         microphoneButton.backgroundColor = UIColor(red:0.14, green:0.14, blue:0.14, alpha:1)
+        screenShareButton.backgroundColor = UIColor(red:0.14, green:0.14, blue:0.14, alpha:1)
         switchBuiltInSpeakerButton.backgroundColor = UIColor.white
         
         // Default behavior to check if video is enabled.
@@ -189,6 +192,8 @@ class VCKViewController: UIViewController {
         if #available(iOS 11.0, *) {} else {
             screenShareButton.isHidden = true
             screenShareImage.isHidden = true
+            shareScreenFirstLine.isHidden = true
+            shareScreenSecondLine.isHidden = true
         }
         
         // Disable automatic screen lock.
@@ -213,10 +218,14 @@ class VCKViewController: UIViewController {
             UIView.animate(withDuration: 0.125) {
                 self.microphoneButton.alpha = 0
                 self.microphoneImage.alpha = 0
+                self.speakerLabel.alpha = 0
                 self.cameraButton.alpha = 0
                 self.cameraImage.alpha = 0
+                self.videoLabel.alpha = 0
                 self.screenShareButton.alpha = 0
                 self.screenShareImage.alpha = 0
+                self.shareScreenFirstLine.alpha = 0
+                self.shareScreenSecondLine.alpha = 0
             }
             UIView.animate(withDuration: 0.25) {
                 self.microphoneButton.isHidden = true
@@ -227,6 +236,8 @@ class VCKViewController: UIViewController {
                 self.videoLabel.isHidden = true
                 self.screenShareButton.isHidden = true
                 self.screenShareImage.isHidden = true
+                self.shareScreenFirstLine.isHidden = true
+                self.shareScreenSecondLine.isHidden = true
             }
             cameraButton.tag = 0
         }
@@ -376,16 +387,19 @@ class VCKViewController: UIViewController {
             if screenShareButton.tag == 0 {
                 screenShareButton.tag = 1
                 screenShareImage.image = UIImage(named: "ScreenShareOn", in: Bundle(for: type(of: self)), compatibleWith: nil)
+                screenShareButton.backgroundColor = UIColor.white
                 
                 VoxeetSDK.shared.conference.startScreenShare { (error) in
                     if let _ = error {
                         self.screenShareImage.image = UIImage(named: "ScreenShareOff", in: Bundle(for: type(of: self)), compatibleWith: nil)
+                        screenShareButton.backgroundColor = UIColor(red:0.14, green:0.14, blue:0.14, alpha:1)
                         return
                     }
                 }
             } else {
                 screenShareButton.tag = 0
                 screenShareImage.image = UIImage(named: "ScreenShareOff", in: Bundle(for: type(of: self)), compatibleWith: nil)
+                screenShareButton.backgroundColor = UIColor(red:0.14, green:0.14, blue:0.14, alpha:1)
                 
                 VoxeetSDK.shared.conference.stopScreenShare { (error) in
                     if let _ = error {
