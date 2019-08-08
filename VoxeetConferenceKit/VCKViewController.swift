@@ -717,9 +717,5 @@ class VCKViewController: UIViewController {
     }
     
     @objc private func didEnterBackgroundNotification() {
-        if #available(iOS 11.0, *), self.screenShareButton.tag == 1 {
-            VoxeetSDK.shared.conference.startScreenShare { _ in
-            }
-        }
     }
 }
