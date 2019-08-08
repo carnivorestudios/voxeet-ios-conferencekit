@@ -392,7 +392,7 @@ class VCKViewController: UIViewController {
                 VoxeetSDK.shared.conference.startScreenShare { (error) in
                     if let _ = error {
                         self.screenShareImage.image = UIImage(named: "ScreenShareOff", in: Bundle(for: type(of: self)), compatibleWith: nil)
-                        screenShareButton.backgroundColor = UIColor(red:0.14, green:0.14, blue:0.14, alpha:1)
+                        self.screenShareButton.backgroundColor = UIColor(red:0.14, green:0.14, blue:0.14, alpha:1)
                         return
                     }
                 }
@@ -497,7 +497,7 @@ class VCKViewController: UIViewController {
         }
         
         // Play outgoing sound only if the caller didn't join the conference yet.
-        if VoxeetSDK.shared.conference.users.filter({ $0.asStream }).isEmpty {
+        if VoxeetSDK.shared.conference.users.filter({ $0.hasStream }).isEmpty {
             // Play outgoing sound.
             outgoingSound?.play()
         }
@@ -508,7 +508,7 @@ class VCKViewController: UIViewController {
         var loudestVoiceLevel: Double = 0
         
         // Getting the loudest speaker.
-        for user in VoxeetSDK.shared.conference.users.filter({ $0.asStream }) {
+        for user in VoxeetSDK.shared.conference.users.filter({ $0.hasStream }) {
             if let userID = user.id {
                 let currentVoiceLevel = VoxeetSDK.shared.conference.voiceLevel(userID: userID)
                 

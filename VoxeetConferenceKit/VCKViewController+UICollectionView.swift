@@ -12,7 +12,7 @@ import VoxeetSDK
 extension VCKViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let users = VoxeetSDK.shared.conference.users
-        if users.count == 1 && users.first?.asStream == true {
+        if users.count == 1 && users.first?.hasStream == true {
             collectionView.alpha = 0
         } else {
             collectionView.alpha = 1
@@ -26,7 +26,7 @@ extension VCKViewController: UICollectionViewDataSource {
         // Get user.
         let users = VoxeetSDK.shared.conference.users
         guard users.count != 0 && indexPath.row <= users.count else { return cell }
-        if users.count == 1 && users.first?.asStream == true { return cell }
+        if users.count == 1 && users.first?.hasStream == true { return cell }
         let user = users[indexPath.row]
         
         // Cell data.
@@ -56,7 +56,7 @@ extension VCKViewController: UICollectionViewDataSource {
         cell.videoRenderer.layer.borderWidth = cell.avatar.layer.borderWidth
         
         // User is currently in conference.
-        if user.asStream {
+        if user.hasStream {
             // Update cell alpha.
             cell.avatar.alpha = 1
             cell.name.alpha = cell.avatar.alpha

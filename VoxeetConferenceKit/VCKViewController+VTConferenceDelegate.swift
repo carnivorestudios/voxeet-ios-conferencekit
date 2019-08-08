@@ -87,7 +87,7 @@ extension VCKViewController: VTConferenceDelegate {
             // Update user's audio position to listen each users clearly in a 3D environment.
             updateUserPosition()
             
-            if (VoxeetSDK.shared.conference.users.filter({ $0.asStream }).count == 0)  {
+            if (VoxeetSDK.shared.conference.users.filter({ $0.hasStream }).count == 0)  {
                 let alertController = UIAlertController(title: "Update: Call Ended", message: "Call terminated from insufficient users", preferredStyle: UIAlertController.Style.alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
@@ -100,7 +100,6 @@ extension VCKViewController: VTConferenceDelegate {
     
     func screenShareStarted(userID: String, stream: MediaStream) {
         if userID == VoxeetSDK.shared.session.user?.id { return }
-        let user = VoxeetSDK.shared.conference.user(userID: userID)
         
         // Re-update the current main user to enable / disable a video stream.
         updateMainUser(user: mainUser)
@@ -134,7 +133,7 @@ extension VCKViewController: VTConferenceDelegate {
     }
     
     private func updateUserPosition() {
-        let users = VoxeetSDK.shared.conference.users.filter({ $0.asStream })
+        let users = VoxeetSDK.shared.conference.users.filter({ $0.hasStream })
         let sliceAngle = Double.pi / Double(users.count)
         
         for (index, user) in users.enumerated() {

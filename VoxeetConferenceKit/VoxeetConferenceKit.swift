@@ -301,19 +301,6 @@ import VoxeetSDK
     
     private func generateMinimizeConstraints() {
         guard let vckView = vckVC?.view, let window = vckView.window else { return }
-        let safeArea = safeAreaInsets()
-        
-        // Generates magnet corner constraints.
-        /*if vckView.frame.origin.x <= window.frame.width / 2 - vckView.frame.width / 2 {
-            vckVCMinimizeVisualConstraintsHorizontal = "H:|-\(safeArea.left + 10)-[vckView(\(vckView.frame.width))]"
-        } else {
-            vckVCMinimizeVisualConstraintsHorizontal = "H:[vckView(\(vckView.frame.width))]-\(safeArea.right + 10)-|"
-        }
-        if vckView.frame.origin.y <= window.frame.height / 2 - vckView.frame.height / 2 || keyboardOpenned {
-            vckVCMinimizeVisualConstraintsVertical = "V:|-\(safeArea.top + 10)-[vckView(\(vckView.frame.height))]"
-        } else {
-            vckVCMinimizeVisualConstraintsVertical = "V:[vckView(\(vckView.frame.height))]-\(safeArea.bottom + 10)-|"
-        }*/
         if (vckView.frame.origin.x > 0 && vckView.frame.origin.x + vckView.frame.width < window.frame.width && vckView.frame.origin.y > 0 && vckView.frame.origin.y + vckView.frame.height < window.frame.height) {
             vckVCMinimizeVisualConstraintsHorizontal = "H:|-\(vckView.frame.origin.x)-[vckView(\(vckView.frame.width))]"
             vckVCMinimizeVisualConstraintsVertical = "V:|-\(vckView.frame.origin.y)-[vckView(\(vckView.frame.height))]"
