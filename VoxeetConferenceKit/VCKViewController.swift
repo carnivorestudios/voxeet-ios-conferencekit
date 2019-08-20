@@ -698,7 +698,7 @@ class VCKViewController: UIViewController {
         // SwitchBuiltInSpeakerButton state.
         DispatchQueue.main.async {
             let output = AVAudioSession.sharedInstance().currentRoute.outputs.first
-            if output?.portType == .builtInReceiver || output?.portType == .builtInSpeaker {
+            if output?.portType == .builtInReceiver || output?.portType == .builtInSpeaker || output?.portType == .headphones {
                 self.switchBuiltInSpeakerButton.isEnabled = true
                 
                 if output?.portType == .builtInSpeaker {
