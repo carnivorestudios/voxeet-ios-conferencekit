@@ -14,7 +14,7 @@
         <scene sceneID="N2R-xx-WaH">
             <objects>
                 <viewController id="vX9-VW-Q3b" customClass="VCKViewController" customModule="VoxeetConferenceKit" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="0gX-6N-twr">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="0gX-6N-twr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -31,14 +31,14 @@
                                         <color key="textColor" red="0.87688372459999997" green="0.87688372459999997" blue="0.87688372459999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qOk-Iu-Y79" customClass="VTVideoView" customModule="VoxeetSDK">
+                                    <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qOk-Iu-Y79" customClass="VTVideoView" customModule="VoxeetSDK">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="contentFill" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cxf-fH-dED" customClass="VTVideoView" customModule="VoxeetSDK">
+                                    <view hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cxf-fH-dED" customClass="VTVideoView" customModule="VoxeetSDK">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <userDefinedRuntimeAttributes>

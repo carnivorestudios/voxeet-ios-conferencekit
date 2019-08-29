@@ -272,6 +272,8 @@ class VCKViewController: UIViewController {
         // Set container corner radius.
         self.view.layer.cornerRadius = 6
         mainContainer.layer.cornerRadius = self.view.layer.cornerRadius
+        mainVideoRenderer.layer.cornerRadius = self.view.layer.cornerRadius
+        screenShareVideoRenderer.layer.cornerRadius = self.view.layer.cornerRadius
     }
     
     private func resizeTransitionUI(minimized: Bool, animated: Bool) {
@@ -323,6 +325,7 @@ class VCKViewController: UIViewController {
      */
     
     @IBAction func minimizeAction(_ sender: Any) {
+        NotificationCenter.default.post(name: Notification.Name("VTCallInfoDetails"), object: nil, userInfo: ["VTCallInfoDetails":"MinimizedView"])
         VoxeetConferenceKit.shared.minimize()
     }
     
@@ -331,8 +334,10 @@ class VCKViewController: UIViewController {
             let isMuted = VoxeetSDK.shared.conference.toggleMute(userID: userID)
             microphoneImage.image = UIImage(named: isMuted ? "MicrophoneOff" : "MicrophoneOn", in: Bundle(for: type(of: self)), compatibleWith: nil)
             if (isMuted) {
+                NotificationCenter.default.post(name: Notification.Name("VTCallInfoDetails"), object: nil, userInfo: ["VTCallInfoDetails":"MicrophoneOff"])
                 microphoneButton.backgroundColor = UIColor.white
             } else {
+                NotificationCenter.default.post(name: Notification.Name("VTCallInfoDetails"), object: nil, userInfo: ["VTCallInfoDetails":"MicrophoneOn"])
                 microphoneButton.backgroundColor = UIColor(red:0.14, green:0.14, blue:0.14, alpha:1)
             }
         }
@@ -346,7 +351,7 @@ class VCKViewController: UIViewController {
                 self.cameraButton.tag = 1
                 self.cameraImage.image = UIImage(named: "CameraOn", in: Bundle(for: type(of: self)), compatibleWith: nil)
                 self.cameraButton.backgroundColor = UIColor.white
-                
+                NotificationCenter.default.post(name: Notification.Name("VTCallInfoDetails"), object: nil, userInfo: ["VTCallInfoDetails":"VideoOn"])
                 VoxeetSDK.shared.conference.startVideo(userID: userID)
                 
                 // Also switch to the built in speaker when the video starts.
@@ -354,6 +359,7 @@ class VCKViewController: UIViewController {
                     self.switchBuiltInSpeakerAction()
                 }
             } else {
+                NotificationCenter.default.post(name: Notification.Name("VTCallInfoDetails"), object: nil, userInfo: ["VTCallInfoDetails":"VideoOff"])
                 self.cameraButton.tag = 0
                 self.cameraImage.image = UIImage(named: "CameraOff", in: Bundle(for: type(of: self)), compatibleWith: nil)
                 self.cameraButton.backgroundColor = UIColor(red:0.14, green:0.14, blue:0.14, alpha:1)
@@ -365,10 +371,12 @@ class VCKViewController: UIViewController {
     @IBAction func switchBuiltInSpeakerAction(_ sender: Any? = nil) {
         if switchBuiltInSpeakerButton.tag == 0 {
             switchBuiltInSpeakerButton.tag = 1
+            NotificationCenter.default.post(name: Notification.Name("VTCallInfoDetails"), object: nil, userInfo: ["VTCallInfoDetails":"SpeakerOff"])
             speakerImage.image = UIImage(named: "BuiltInSpeakerOff", in: Bundle(for: type(of: self)), compatibleWith: nil)
             switchBuiltInSpeakerButton.backgroundColor = UIColor(red:0.14, green:0.14, blue:0.14, alpha:1)
         } else {
             switchBuiltInSpeakerButton.tag = 0
+            NotificationCenter.default.post(name: Notification.Name("VTCallInfoDetails"), object: nil, userInfo: ["VTCallInfoDetails":"SpeakerOn"])
             speakerImage.image = UIImage(named: "BuiltInSpeakerOn", in: Bundle(for: type(of: self)), compatibleWith: nil)
             switchBuiltInSpeakerButton.backgroundColor = UIColor.white
         }
@@ -386,11 +394,13 @@ class VCKViewController: UIViewController {
         if #available(iOS 11.0, *) {
             if screenShareButton.tag == 0 {
                 screenShareButton.tag = 1
+                NotificationCenter.default.post(name: Notification.Name("VTCallInfoDetails"), object: nil, userInfo: ["VTCallInfoDetails":"ScreenShareOn"])
                 screenShareImage.image = UIImage(named: "ScreenShareOn", in: Bundle(for: type(of: self)), compatibleWith: nil)
                 screenShareButton.backgroundColor = UIColor.white
                 
                 VoxeetSDK.shared.conference.startScreenShare { (error) in
                     if let _ = error {
+                        NotificationCenter.default.post(name: Notification.Name("VTCallInfoDetails"), object: nil, userInfo: ["VTCallInfoDetails":"ScreenShareOff"])
                         self.screenShareImage.image = UIImage(named: "ScreenShareOff", in: Bundle(for: type(of: self)), compatibleWith: nil)
                         self.screenShareButton.backgroundColor = UIColor(red:0.14, green:0.14, blue:0.14, alpha:1)
                         return
@@ -398,6 +408,7 @@ class VCKViewController: UIViewController {
                 }
             } else {
                 screenShareButton.tag = 0
+                NotificationCenter.default.post(name: Notification.Name("VTCallInfoDetails"), object: nil, userInfo: ["VTCallInfoDetails":"ScreenShareOff"])
                 screenShareImage.image = UIImage(named: "ScreenShareOff", in: Bundle(for: type(of: self)), compatibleWith: nil)
                 screenShareButton.backgroundColor = UIColor(red:0.14, green:0.14, blue:0.14, alpha:1)
                 
@@ -441,6 +452,7 @@ class VCKViewController: UIViewController {
             hangUpTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(hangUpRetry), userInfo: nil, repeats: true)
             return
         }
+        NotificationCenter.default.post(name: Notification.Name("VTCallInfoDetails"), object: nil, userInfo: ["VTCallInfoDetails":"LeaveCall"])
         VoxeetSDK.shared.conference.leave()
     }
     
