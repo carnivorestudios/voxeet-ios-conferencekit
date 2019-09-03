@@ -304,6 +304,9 @@ class VCKViewController: UIViewController {
     
     private func alphaTransitionUI(minimized: Bool) {
         topView.alpha = minimized ? 0 : 1
+        microphoneImage.alpha = minimized ? 0 : 1
+        cameraImage.alpha = minimized ? 0 : 1
+        speakerImage.alpha = minimized ? 0 : 1
         bottomContainerView.alpha = minimized ? 0 : 1
         conferenceTimerContainerView.alpha = 1
         mainAvatarLabel.alpha = minimized ? 0 : 1
@@ -317,6 +320,13 @@ class VCKViewController: UIViewController {
         } else {
             ownVideoRenderer.alpha = 0
             flipImage.alpha = 0
+        }
+        mainAvatarContainer.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        mainAvatarContainer.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        if minimized == true {
+            mainAvatarContainer.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        }else{
+            mainAvatarContainer.transform = CGAffineTransform(scaleX: 1, y: 1)
         }
     }
     
