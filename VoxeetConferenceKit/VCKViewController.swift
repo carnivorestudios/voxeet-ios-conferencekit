@@ -581,9 +581,9 @@ class VCKViewController: UIViewController {
         let second = date.truncatingRemainder(dividingBy: 60)
         DispatchQueue.main.async {
             if (floor(date) > 60 && (self.conferenceStateLabel.text == NSLocalizedString("CONFERENCE_STATE_CALLING", bundle: Bundle(for: type(of: self)), comment: "")) && !((self.conferenceStateLabel.isHidden))) {
-                let alertController = UIAlertController(title: "Error: Call Inactivity", message: "Call terminated from insufficient users", preferredStyle: UIAlertController.Style.alert)
-                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                self.present(alertController, animated: true, completion: nil)
+//                let alertController = UIAlertController(title: "Error: Call Inactivity", message: "Call terminated from insufficient users", preferredStyle: UIAlertController.Style.alert)
+//                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+//                self.present(alertController, animated: true, completion: nil)
                 self.hangUpAction()
             }
         }

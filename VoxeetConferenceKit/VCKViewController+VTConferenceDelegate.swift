@@ -72,7 +72,6 @@ extension VCKViewController: VTConferenceDelegate {
                     // Relaunch active speaker mode.
                     resetActiveSpeakerTimer()
                 }
-                
                 updateMainUser(user: nil)
             }
             
@@ -88,9 +87,9 @@ extension VCKViewController: VTConferenceDelegate {
             updateUserPosition()
             
             if (VoxeetSDK.shared.conference.users.filter({ $0.hasStream }).count == 0)  {
-                let alertController = UIAlertController(title: "Update: Call Ended", message: "Call terminated from insufficient users", preferredStyle: UIAlertController.Style.alert)
-                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                self.present(alertController, animated: true, completion: nil)
+//                let alertController = UIAlertController(title: "Update: Call Ended", message: "Call terminated from insufficient users", preferredStyle: UIAlertController.Style.alert)
+//                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+//                self.present(alertController, animated: true, completion: nil)
                 self.hangUpAction()
             }
         }
