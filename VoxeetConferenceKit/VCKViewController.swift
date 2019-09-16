@@ -661,8 +661,11 @@ class VCKViewController: UIViewController {
             let imageURLStr = avatarURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
             if let imageURL = URL(string: imageURLStr) {
                 mainAvatar.kf.setImage(with: imageURL)
+            }else if user != nil{
+                mainAvatar.image = InitialsImageFactory.imageWith(initials: user?.avatarURL, user: user)
             }
         }
+        
         mainAvatarLabel.text = user?.name
         
         let userID = user?.id

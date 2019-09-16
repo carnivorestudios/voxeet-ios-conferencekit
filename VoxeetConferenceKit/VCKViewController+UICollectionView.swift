@@ -40,6 +40,8 @@ extension VCKViewController: UICollectionViewDataSource {
             let imageURLStr = avatarURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
             if let imageURL = URL(string: imageURLStr) {
                 cell.avatar.kf.setImage(with: imageURL)
+            }else if user != nil{
+                cell.avatar.image = InitialsImageFactory.imageWith(initials: user.avatarURL, user: user)
             }
         }
         cell.name.text = user.name
