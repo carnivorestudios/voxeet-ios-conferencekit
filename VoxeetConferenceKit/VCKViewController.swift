@@ -654,6 +654,7 @@ class VCKViewController: UIViewController {
         
         mainUser = user
         let avatarURL = user?.avatarURL ?? ""
+        mainAvatar.image = nil
         if avatarURL.count == 2 {
             mainAvatar.image = InitialsImageFactory.imageWith(initials: user?.avatarURL, user: user)
         } else {

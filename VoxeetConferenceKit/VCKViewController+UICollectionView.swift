@@ -29,6 +29,9 @@ extension VCKViewController: UICollectionViewDataSource {
         if users.count == 1 && users.first?.hasStream == true { return cell }
         let user = users[indexPath.row]
         
+        // Clear the image while reload
+        cell.avatar.image = nil
+        
         // Cell data.
         let avatarURL = user.avatarURL ?? ""
         if avatarURL.count == 2 {
