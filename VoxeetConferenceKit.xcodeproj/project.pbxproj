@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB9B0AAC23336C1300131976 /* CHQring.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AB9B0AAB23336C1200131976 /* CHQring.mp3 */; };
 		CC2B28B61E54501E00E3EB57 /* VoxeetConferenceKit.h in Headers */ = {isa = PBXBuildFile; fileRef = CC2B28B41E54501E00E3EB57 /* VoxeetConferenceKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CC2B28D21E54522100E3EB57 /* VoxeetConferenceKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2B28D11E54522100E3EB57 /* VoxeetConferenceKit.swift */; };
 		CC2B290D1E5469C300E3EB57 /* VCKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2B290C1E5469C300E3EB57 /* VCKViewController.swift */; };
@@ -20,7 +21,6 @@
 		CCC1BF111FE424E600C61343 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CCC1BF131FE424E600C61343 /* Localizable.strings */; };
 		CCCA16B81FE7B40B00C0065A /* CallHangUp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CCCA16B61FE7B40B00C0065A /* CallHangUp.mp3 */; };
 		CCD0ED5E1EAF96BB00612478 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCD0ED5D1EAF96BB00612478 /* Kingfisher.framework */; };
-		CCE03626216B838E0089F8F9 /* CallOutgoing.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CCE03625216B838E0089F8F9 /* CallOutgoing.mp3 */; };
 		CCEEEEF11F0A9C52000F4D61 /* Print+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEEEEF01F0A9C52000F4D61 /* Print+Extension.swift */; };
 		CCF2BB5F224CDCDF00E9A88E /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCF2BB5D224CDCDF00E9A88E /* WebRTC.framework */; };
 		CCF2BB60224CDCDF00E9A88E /* VoxeetSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCF2BB5E224CDCDF00E9A88E /* VoxeetSDK.framework */; };
@@ -29,12 +29,12 @@
 		F1340ABB22D9454B008A58AA /* NameCallLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1340ABA22D9454B008A58AA /* NameCallLabel.swift */; };
 		F1340ABD22DD409B008A58AA /* InitialsImageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1340ABC22DD409B008A58AA /* InitialsImageFactory.swift */; };
 		F17C7FF422E6356800273F6A /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17C7FF322E6356800273F6A /* NetworkStatus.swift */; };
-		F18B93FC22FCB48B00888A58 /* CHQring.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F18B93FB22FCB48B00888A58 /* CHQring.mp3 */; };
 		F1AFB32422EF7B38007E294A /* timerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AFB32322EF7B38007E294A /* timerLabel.swift */; };
 		F1BE11DB22EFA76800AEB5D5 /* buttonTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BE11DA22EFA76800AEB5D5 /* buttonTitleLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB9B0AAB23336C1200131976 /* CHQring.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = CHQring.mp3; path = Assets/Sounds/CHQring.mp3; sourceTree = "<group>"; };
 		CC2B28B11E54501E00E3EB57 /* VoxeetConferenceKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VoxeetConferenceKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC2B28B41E54501E00E3EB57 /* VoxeetConferenceKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoxeetConferenceKit.h; sourceTree = "<group>"; };
 		CC2B28B51E54501E00E3EB57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -50,7 +50,6 @@
 		CCC1BF121FE424E600C61343 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CCCA16B61FE7B40B00C0065A /* CallHangUp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = CallHangUp.mp3; path = Assets/Sounds/CallHangUp.mp3; sourceTree = "<group>"; };
 		CCD0ED5D1EAF96BB00612478 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
-		CCE03625216B838E0089F8F9 /* CallOutgoing.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = CallOutgoing.mp3; path = Assets/Sounds/CallOutgoing.mp3; sourceTree = "<group>"; };
 		CCEEEEF01F0A9C52000F4D61 /* Print+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Print+Extension.swift"; sourceTree = "<group>"; };
 		CCF2BB5D224CDCDF00E9A88E /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebRTC.framework; path = Carthage/Build/iOS/WebRTC.framework; sourceTree = "<group>"; };
 		CCF2BB5E224CDCDF00E9A88E /* VoxeetSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VoxeetSDK.framework; path = Carthage/Build/iOS/VoxeetSDK.framework; sourceTree = "<group>"; };
@@ -60,7 +59,6 @@
 		F1340ABA22D9454B008A58AA /* NameCallLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameCallLabel.swift; sourceTree = "<group>"; };
 		F1340ABC22DD409B008A58AA /* InitialsImageFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialsImageFactory.swift; sourceTree = "<group>"; };
 		F17C7FF322E6356800273F6A /* NetworkStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatus.swift; sourceTree = "<group>"; };
-		F18B93FB22FCB48B00888A58 /* CHQring.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = CHQring.mp3; sourceTree = "<group>"; };
 		F1AFB32322EF7B38007E294A /* timerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timerLabel.swift; sourceTree = "<group>"; };
 		F1BE11DA22EFA76800AEB5D5 /* buttonTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = buttonTitleLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,9 +175,8 @@
 		CCCA16B51FE7B3F200C0065A /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				F18B93FB22FCB48B00888A58 /* CHQring.mp3 */,
+				AB9B0AAB23336C1200131976 /* CHQring.mp3 */,
 				CCCA16B61FE7B40B00C0065A /* CallHangUp.mp3 */,
-				CCE03625216B838E0089F8F9 /* CallOutgoing.mp3 */,
 			);
 			name = Sounds;
 			sourceTree = "<group>";
@@ -256,12 +253,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CCE03626216B838E0089F8F9 /* CallOutgoing.mp3 in Resources */,
 				CCFF3DBF21904BF700541075 /* VoxeetConferenceKit.storyboard in Resources */,
 				CCC1BF111FE424E600C61343 /* Localizable.strings in Resources */,
 				CC2B29141E5494D600E3EB57 /* VoxeetConferenceKit.xcassets in Resources */,
 				CCCA16B81FE7B40B00C0065A /* CallHangUp.mp3 in Resources */,
-				F18B93FC22FCB48B00888A58 /* CHQring.mp3 in Resources */,
+				AB9B0AAC23336C1300131976 /* CHQring.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
