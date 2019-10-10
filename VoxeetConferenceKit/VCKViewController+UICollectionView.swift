@@ -41,6 +41,12 @@ extension VCKViewController: UICollectionViewDataSource {
             if let imageURL = URL(string: imageURLStr) {
                 cell.avatar.kf.setImage(with: imageURL)
             }else if user != nil{
+                if (user.name == nil || user.name == "") {
+                    user.name = ""
+                }
+                cell.avatar.image = InitialsImageFactory.imageWith(initials: user.avatarURL, user: user)
+            }else{
+                user.name = ""
                 cell.avatar.image = InitialsImageFactory.imageWith(initials: user.avatarURL, user: user)
             }
         }
