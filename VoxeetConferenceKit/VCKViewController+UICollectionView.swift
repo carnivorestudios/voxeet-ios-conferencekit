@@ -27,7 +27,7 @@ extension VCKViewController: UICollectionViewDataSource {
         let users = VoxeetSDK.shared.conference.users
         guard users.count != 0 && indexPath.row <= users.count else { return cell }
         if users.count == 1 && users.first?.hasStream == true { return cell }
-        guard let user = users[indexPath.row] else {return cell}
+        let user = users[indexPath.row]
         
         // Clear the image while reload
         cell.avatar.image = nil
