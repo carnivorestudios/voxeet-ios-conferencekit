@@ -27,7 +27,7 @@ extension VCKViewController: UICollectionViewDataSource {
         let users = VoxeetSDK.shared.conference.users
         guard users.count != 0 && indexPath.row <= users.count else { return cell }
         if users.count == 1 && users.first?.hasStream == true { return cell }
-        let user = users[indexPath.row]
+        guard let user = users[indexPath.row] else {return cell}
         
         // Clear the image while reload
         cell.avatar.image = nil
@@ -40,13 +40,10 @@ extension VCKViewController: UICollectionViewDataSource {
             let imageURLStr = avatarURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
             if let imageURL = URL(string: imageURLStr) {
                 cell.avatar.kf.setImage(with: imageURL)
-            }else if user != nil{
-                if (user.name == nil || user.name == "") {
-                    user.name = ""
-                }
+            }else if user.name == nil {
+                user.name = ""
                 cell.avatar.image = InitialsImageFactory.imageWith(initials: user.avatarURL, user: user)
             }else{
-                user.name = ""
                 cell.avatar.image = InitialsImageFactory.imageWith(initials: user.avatarURL, user: user)
             }
         }
