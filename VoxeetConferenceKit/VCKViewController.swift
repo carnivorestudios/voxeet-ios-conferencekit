@@ -689,7 +689,7 @@ class VCKViewController: UIViewController {
             }
             
             // Update conferenceTimer view's background color.
-            conferenceTimerContainerView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+            conferenceTimerContainerView.backgroundColor = UIColor.clear
             
             // Hide main avatar and stop voice level timer.
             voiceLevelTimer?.invalidate()
