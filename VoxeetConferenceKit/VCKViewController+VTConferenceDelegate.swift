@@ -22,8 +22,12 @@ extension VCKViewController: VTConferenceDelegate {
         
     }
     
+    func statusUpdated(status: VTConferenceStatus) {
+        
+    }
+    
     func participantJoined(userID: String, stream: MediaStream) {
-        if userID == VoxeetSDK.shared.session.user?.id {
+        if userID == VoxeetSDK.shared.session.participant?.id {
             // Monkey patch: Wait WebRTC media to be started.
             conferenceStartTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(conferenceStart), userInfo: nil, repeats: false)
         } else {
@@ -46,10 +50,10 @@ extension VCKViewController: VTConferenceDelegate {
     }
     
     func participantUpdated(userID: String, stream: MediaStream) {
-        if userID == VoxeetSDK.shared.session.user?.id {
+        if userID == VoxeetSDK.shared.session.participant?.id {
             // Attach own stream to the own video renderer.
             if !stream.videoTracks.isEmpty {
-                VoxeetSDK.shared.conference.attachMediaStream(stream, renderer: ownVideoRenderer)
+                VoxeetSDK.shared.mediaDevice.attachMediaStream(stream, renderer: ownVideoRenderer)
                 
                 // Selfie camera mirror.
                 ownVideoRenderer.mirrorEffect = true
@@ -62,8 +66,7 @@ extension VCKViewController: VTConferenceDelegate {
             })
         } else {
             // Reload users' collection view.
-            let users = VoxeetSDK.shared.conference.users
-            if let index = users.firstIndex(where: { $0.id == userID }) {
+            if let current = VoxeetSDK.shared.conference.current,let index = current.participants.firstIndex(where: { $0.id == userID }) {
                 usersCollectionView.reloadItems(at: [IndexPath(row: index, section: 0)])
             }
             
@@ -75,7 +78,7 @@ extension VCKViewController: VTConferenceDelegate {
     }
     
     func participantLeft(userID: String) {
-        if userID != VoxeetSDK.shared.session.user?.id {
+        if userID != VoxeetSDK.shared.session.participant?.id {
             // If the main user was the loudest speaker resets it.
             if userID == mainUser?.id {
                 // Also reset the selected user.
@@ -98,7 +101,7 @@ extension VCKViewController: VTConferenceDelegate {
             // Update user's audio position to listen each users clearly in a 3D environment.
             updateUserPosition()
             
-            if (VoxeetSDK.shared.conference.users.filter({ $0.hasStream }).count == 0)  {
+            if getActiveParticipants().count == 0  {
 //                let alertController = UIAlertController(title: "Update: Call Ended", message: "Call terminated from insufficient users", preferredStyle: UIAlertController.Style.alert)
 //                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
 //                self.present(alertController, animated: true, completion: nil)
@@ -110,7 +113,7 @@ extension VCKViewController: VTConferenceDelegate {
     func messageReceived(userID: String, message: String) {}
     
     func screenShareStarted(userID: String, stream: MediaStream) {
-        if userID == VoxeetSDK.shared.session.user?.id { return }
+        if userID == VoxeetSDK.shared.session.participant?.id { return }
         
         // Re-update the current main user to enable / disable a video stream.
         updateMainUser(user: mainUser)
@@ -122,7 +125,15 @@ extension VCKViewController: VTConferenceDelegate {
             // Attach screen share stream.
             speakerVideoContentFill = self.screenShareVideoRenderer.contentFill
             self.screenShareVideoRenderer.unattach()
-            self.screenShareVideoRenderer.attach(userID: userID, stream: stream)
+            if let screenShareStartedParticipant = VoxeetSDK.shared.conference.current?.participants.filter({ (participant) -> Bool in
+                if participant.id == userID{
+                    return true
+                }else{
+                    return false
+                }
+                }).first{
+                self.screenShareVideoRenderer.attach(participant: screenShareStartedParticipant, stream: stream)
+            }
             self.screenShareVideoRenderer.contentFill(false, animated: false)
             self.screenShareVideoRenderer.setNeedsLayout()
         }
@@ -130,7 +141,7 @@ extension VCKViewController: VTConferenceDelegate {
     }
     
     func screenShareStopped(userID: String) {
-        if userID == VoxeetSDK.shared.session.user?.id { return }
+        if userID == VoxeetSDK.shared.session.participant?.id { return }
         
         // Re-update the current main user to enable / disable a video stream.
         updateMainUser(user: mainUser)
@@ -144,13 +155,13 @@ extension VCKViewController: VTConferenceDelegate {
     }
     
     private func updateUserPosition() {
-        let users = VoxeetSDK.shared.conference.users.filter({ $0.hasStream })
+        let users = getActiveParticipants()
         let sliceAngle = Double.pi / Double(users.count)
         
         for (index, user) in users.enumerated() {
             let angle = ((Double.pi / 2) - (Double.pi - (sliceAngle * Double(index) + sliceAngle / 2))) / (Double.pi / 2)
-            if let userID = user.id {
-                VoxeetSDK.shared.conference.userPosition(userID: userID, angle: angle, distance: 0.2)
+            if user.id != nil {
+                VoxeetSDK.shared.conference.position(participant: user, angle: angle)
             }
         }
     }

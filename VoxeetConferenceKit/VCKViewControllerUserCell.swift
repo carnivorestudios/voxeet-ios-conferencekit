@@ -14,16 +14,14 @@ class VCKViewControllerUserCell: UICollectionViewCell {
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var name: UILabel!
     
-    var user: VTUser?
+    var participant: VTParticipant?
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
         videoRenderer.isHidden = true
-        
         // Unattach the old stream before reusing the cell.
-        if let userID = user?.id, let stream = VoxeetSDK.shared.conference.mediaStream(userID: userID), !stream.videoTracks.isEmpty {
-            VoxeetSDK.shared.conference.unattachMediaStream(stream, renderer: videoRenderer)
+        if let participant = participant, let stream = participant.streams.first(where: { $0.type == .Camera }), !stream.videoTracks.isEmpty {
+           VoxeetSDK.shared.mediaDevice.attachMediaStream(stream, renderer: videoRenderer)
         }
     }
 }

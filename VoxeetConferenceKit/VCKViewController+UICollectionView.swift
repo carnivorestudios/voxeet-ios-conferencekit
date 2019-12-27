@@ -11,43 +11,49 @@ import VoxeetSDK
 
 extension VCKViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let users = VoxeetSDK.shared.conference.users
-        if users.count == 1 && users.first?.hasStream == true {
-            collectionView.alpha = 0
-        } else {
-            collectionView.alpha = 1
+        if let currentConference = VoxeetSDK.shared.conference.current{
+            if currentConference.participants.count == 1, let firstParticipant = currentConference.participants.first, !firstParticipant.streams.isEmpty{
+                collectionView.alpha = 0
+            }else{
+                collectionView.alpha = 1
+            }
+            return currentConference.participants.count
+        }else{
+            // If there is no users in the conference
+            return 0
         }
-        return users.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserCell", for: indexPath) as! VCKViewControllerUserCell
-        
-        // Get user.
-        let users = VoxeetSDK.shared.conference.users
-        guard users.count != 0 && indexPath.row <= users.count else { return cell }
-        if users.count == 1 && users.first?.hasStream == true { return cell }
-        let user = users[indexPath.row]
+        guard let currentConference = VoxeetSDK.shared.conference.current else{
+            return cell
+        }
+        // Get participants.
+        let participants = currentConference.participants
+        guard participants.count != 0 && indexPath.row <= participants.count else { return cell }
+        if participants.count == 1, let firstParticipant = participants.first, !firstParticipant.streams.isEmpty { return cell }
+        let participant = participants[indexPath.row]
         
         // Clear the image while reload
         cell.avatar.image = nil
         
         // Cell data.
-        let avatarURL = user.avatarURL ?? ""
+        let avatarURL = participant.info.avatarURL ?? ""
         if avatarURL.count == 2 {
-            cell.avatar.image = InitialsImageFactory.imageWith(initials: user.avatarURL, user: user)
+            cell.avatar.image = InitialsImageFactory.imageWith(initials: participant.info.avatarURL, user: participant)
         } else {
             let imageURLStr = avatarURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
             if let imageURL = URL(string: imageURLStr) {
                 cell.avatar.kf.setImage(with: imageURL)
-            }else if user.name == nil {
-                user.name = ""
-                cell.avatar.image = InitialsImageFactory.imageWith(initials: user.avatarURL, user: user)
+            }else if participant.info.name == nil {
+                participant.info.name = ""
+                cell.avatar.image = InitialsImageFactory.imageWith(initials: participant.info.avatarURL, user: participant)
             }else{
-                cell.avatar.image = InitialsImageFactory.imageWith(initials: user.avatarURL, user: user)
+                cell.avatar.image = InitialsImageFactory.imageWith(initials: participant.info.avatarURL, user: participant)
             }
         }
-        cell.name.text = user.name
+        cell.name.text = participant.info.name
         
         // Cell alpha.
         cell.avatar.alpha = 0.4
@@ -56,7 +62,7 @@ extension VCKViewController: UICollectionViewDataSource {
         // Cell border property.
         cell.avatar.layer.borderColor = UIColor(red: 41/255, green: 162/255, blue: 251/255, alpha: 1).cgColor
         cell.videoRenderer.layer.borderColor = cell.avatar.layer.borderColor
-        if let userID = user.id, userID == selectedUser?.id {
+        if let userID = participant.id, userID == selectedUser?.id {
             cell.avatar.layer.borderWidth = 2
         } else {
             cell.avatar.layer.borderWidth = 0
@@ -64,18 +70,18 @@ extension VCKViewController: UICollectionViewDataSource {
         cell.videoRenderer.layer.borderWidth = cell.avatar.layer.borderWidth
         
         // User is currently in conference.
-        if user.hasStream {
+        if !participant.streams.isEmpty {
             // Update cell alpha.
             cell.avatar.alpha = 1
             cell.name.alpha = cell.avatar.alpha
             
             // Update cell's user.
-            cell.user = user
+            cell.participant = participant
             
             // Attach a video stream.
-            if let userID = user.id, let stream = VoxeetSDK.shared.conference.mediaStream(userID: userID), !stream.videoTracks.isEmpty {
+            if let stream = participant.streams.first(where: { $0.type == .Camera }), !stream.videoTracks.isEmpty {
                 cell.videoRenderer.isHidden = false
-                VoxeetSDK.shared.conference.attachMediaStream(stream, renderer: cell.videoRenderer)
+                VoxeetSDK.shared.mediaDevice.attachMediaStream(stream, renderer: cell.videoRenderer)
             }
         }
         
@@ -85,13 +91,16 @@ extension VCKViewController: UICollectionViewDataSource {
 
 extension VCKViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let user = VoxeetSDK.shared.conference.users[indexPath.row]
+        guard let currentConference = VoxeetSDK.shared.conference.current else{
+            return
+        }
+        let user = currentConference.participants[indexPath.row]
         
         // Select / unselect a user.
         if let userID = user.id, user.status == .connected, userID != selectedUser?.id {
             var indexPaths = [indexPath]
             // Reload old selected user's cell.
-            if let selectedUserID = selectedUser?.id, let selectedUserIndex = VoxeetSDK.shared.conference.users.firstIndex(where: { $0.id == selectedUserID }) {
+            if let selectedUserID = selectedUser?.id, let selectedUserIndex = currentConference.participants.firstIndex(where: { $0.id == selectedUserID }) {
                 let selectedUserIndexPath = IndexPath(item: selectedUserIndex, section: 0)
                 indexPaths.append(selectedUserIndexPath)
             }

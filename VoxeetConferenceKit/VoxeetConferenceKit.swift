@@ -56,8 +56,6 @@ import VoxeetSDK
         NotificationCenter.default.addObserver(self, selector: #selector(ownParticipantSwitched), name: .VTOwnParticipantSwitched, object: nil)
         // CallKit notifications.
         NotificationCenter.default.addObserver(self, selector: #selector(callKitSwapped), name: .VTCallKitSwapped, object: nil)
-        // Conference state notifications.
-        NotificationCenter.default.addObserver(self, selector: #selector(conferenceStateUpdated), name: .VTConferenceStateUpdated, object: nil)
         
         // Constraints updates notifications.
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
@@ -386,51 +384,69 @@ extension VoxeetConferenceKit {
  *  MARK: - Notifications: conference state
  */
 
-extension VoxeetConferenceKit {
-    @objc private func conferenceStateUpdated(notification: NSNotification) {
-        guard let stateInteger = notification.userInfo?["state"] as? Int, let state = VTConferenceState(rawValue: stateInteger) else {
-            return
-        }
-        
-        switch state {
-        case .connecting:
-            // Show conference.
-            show()
-            
-            // Update conference state label.
-            vckVC?.conferenceStateLabel.text = NSLocalizedString("CONFERENCE_STATE_CALLING", bundle: Bundle(for: type(of: self)), comment: "")
-            vckVC?.conferenceStateLabel.isHidden = false
-            vckVC?.conferenceStateLabel.font = UIFont(name: "Poppins-Bold", size: 24)
-            vckVC?.usersCollectionView.isHidden = true
-            vckVC?.conferenceStateLabel.textColor = UIColor.white
-        case .connected:
-            vckVC?.enableButtons(areEnabled: true)
-            vckVC?.usersCollectionView.isHidden = false
-        case .disconnecting:
-            // Update conference state label.
-            if vckVC?.conferenceStateLabel.text == nil {
-                vckVC?.conferenceStateLabel.text = NSLocalizedString("CONFERENCE_STATE_ENDED", bundle: Bundle(for: type(of: self)), comment: "")
-                vckVC?.conferenceStateLabel.font = UIFont(name: "Poppins-Bold", size: 24)
-            }
-            vckVC?.conferenceStartTimer?.invalidate()
-            vckVC?.conferenceStateLabel.isHidden = false
-            
-            // Hide main user.
-            vckVC?.activeSpeakerTimer?.invalidate()
-            vckVC?.updateMainUser(user: nil)
-            // Hide users collection view.
-            vckVC?.usersCollectionView.isHidden = true
-            
-            if (!NetworkStatus.shared.isReachable) {
-                vckVC?.mainAvatarContainer.alpha = 0
-            }
+extension VoxeetConferenceKit:VTConferenceDelegate {
+    public func streamAdded(participant: VTParticipant, stream: MediaStream) {
+        // No need to implement now
+    }
     
-            // Stop outgoing sound if it was started.
-            vckVC?.outgoingSound?.stop()
-            vckVC?.outgoingSound = nil
-        case .disconnected:
-            // Hide conference.
-            hide()
+    public func streamUpdated(participant: VTParticipant, stream: MediaStream) {
+        // No need to implement now
+    }
+    
+    public func streamRemoved(participant: VTParticipant, stream: MediaStream) {
+        // No need to implement now
+    }
+    
+    public func statusUpdated(status: VTConferenceStatus) {
+        switch status {
+            case .creating:
+                // Show conference.
+                show()
+                
+                // Update conference state label.
+                vckVC?.conferenceStateLabel.text = NSLocalizedString("CONFERENCE_STATE_CALLING", bundle: Bundle(for: type(of: self)), comment: "")
+                vckVC?.conferenceStateLabel.isHidden = false
+                vckVC?.conferenceStateLabel.font = UIFont(name: "Poppins-Bold", size: 24)
+                vckVC?.usersCollectionView.isHidden = true
+                vckVC?.conferenceStateLabel.textColor = UIColor.white
+            case .created:
+                vckVC?.enableButtons(areEnabled: true)
+                vckVC?.usersCollectionView.isHidden = false
+            case .leaving:
+                // Update conference state label.
+                if vckVC?.conferenceStateLabel.text == nil {
+                    vckVC?.conferenceStateLabel.text = NSLocalizedString("CONFERENCE_STATE_ENDED", bundle: Bundle(for: type(of: self)), comment: "")
+                    vckVC?.conferenceStateLabel.font = UIFont(name: "Poppins-Bold", size: 24)
+                }
+                vckVC?.conferenceStartTimer?.invalidate()
+                vckVC?.conferenceStateLabel.isHidden = false
+                
+                // Hide main user.
+                vckVC?.activeSpeakerTimer?.invalidate()
+                vckVC?.updateMainUser(user: nil)
+                // Hide users collection view.
+                vckVC?.usersCollectionView.isHidden = true
+                
+                if (!NetworkStatus.shared.isReachable) {
+                    vckVC?.mainAvatarContainer.alpha = 0
+                }
+        
+                // Stop outgoing sound if it was started.
+                vckVC?.outgoingSound?.stop()
+                vckVC?.outgoingSound = nil
+            case .left:
+                // Hide conference.
+                hide()
+        case .joining: break
+            
+        case .joined: break
+            
+        case .ended: break
+            
+        case .destroyed: break
+            
+        case .error: break
+            
         }
     }
 }

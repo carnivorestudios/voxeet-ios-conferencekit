@@ -11,7 +11,7 @@ import VoxeetSDK
 
 class InitialsImageFactory: NSObject {
     
-    class func imageWith(initials: String?, user: VTUser?) -> UIImage? {
+    class func imageWith(initials: String?, user: VTParticipant?) -> UIImage? {
         
         let frame = CGRect(x: 0, y: 0, width: 200, height: 200)
         let colors:[UIColor] = ["263238".toUIColor(),
@@ -49,7 +49,7 @@ class InitialsImageFactory: NSObject {
                                 "BBE367".toUIColor(),
                                 "C5C5C5".toUIColor()]
         var total: Int = 0
-        for u in (user?.name!.unicodeScalars)! {
+        for u in (user?.info.name!.unicodeScalars)! {
             total += Int(UInt32(u))
         }
         let index = total % colors.count

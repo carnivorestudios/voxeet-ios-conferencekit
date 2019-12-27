@@ -57,8 +57,8 @@ class VCKViewController: UIViewController {
     
     /* Stored */
     
-    var mainUser: VTUser?
-    var selectedUser: VTUser?
+    var mainUser: VTParticipant?
+    var selectedUser: VTParticipant?
     var screenShareUserID: String?
     
     // Timers.
@@ -340,8 +340,9 @@ class VCKViewController: UIViewController {
     }
     
     @IBAction func microphoneAction(_ sender: Any) {
-        if let userID = VoxeetSDK.shared.session.user?.id {
-            let isMuted = VoxeetSDK.shared.conference.toggleMute(userID: userID)
+        if let participant = VoxeetSDK.shared.session.participant{
+            let isMuted = !participant.mute
+            VoxeetSDK.shared.conference.mute(participant: participant, isMuted: isMuted)
             microphoneImage.image = UIImage(named: isMuted ? "MicrophoneOff" : "MicrophoneOn", in: Bundle(for: type(of: self)), compatibleWith: nil)
             if (isMuted) {
                 NotificationCenter.default.post(name: Notification.Name("VTCallInfoDetails"), object: nil, userInfo: ["VTCallInfoDetails":"MicrophoneOff"])
@@ -355,14 +356,14 @@ class VCKViewController: UIViewController {
     
     @IBAction func cameraAction(_ sender: Any? = nil) {
         VCKPermission.cameraPermission(controller: self) { granted in
-            guard let userID = VoxeetSDK.shared.session.user?.id, granted else { return }
+            guard let participant = VoxeetSDK.shared.session.participant, granted else { return }
             
             if self.cameraButton.tag == 0 {
                 self.cameraButton.tag = 1
                 self.cameraImage.image = UIImage(named: "CameraOn", in: Bundle(for: type(of: self)), compatibleWith: nil)
                 self.cameraButton.backgroundColor = UIColor.white
                 NotificationCenter.default.post(name: Notification.Name("VTCallInfoDetails"), object: nil, userInfo: ["VTCallInfoDetails":"VideoOn"])
-                VoxeetSDK.shared.conference.startVideo(userID: userID)
+                VoxeetSDK.shared.conference.startVideo(participant: participant)
                 
                 // Also switch to the built in speaker when the video starts.
                 if self.switchBuiltInSpeakerButton.tag != 0 {
@@ -373,7 +374,7 @@ class VCKViewController: UIViewController {
                 self.cameraButton.tag = 0
                 self.cameraImage.image = UIImage(named: "CameraOff", in: Bundle(for: type(of: self)), compatibleWith: nil)
                 self.cameraButton.backgroundColor = UIColor(red:0.14, green:0.14, blue:0.14, alpha:1)
-                VoxeetSDK.shared.conference.stopVideo(userID: userID)
+                VoxeetSDK.shared.conference.stopVideo(participant: participant)
             }
         }
     }
@@ -393,11 +394,11 @@ class VCKViewController: UIViewController {
         
         // Switch device speaker and set the proximity sensor in line with the current speaker.
         UIDevice.current.isProximityMonitoringEnabled = switchBuiltInSpeakerButton.tag != 0
-        VoxeetSDK.shared.conference.switchDeviceSpeaker(forceBuiltInSpeaker: switchBuiltInSpeakerButton.tag == 0)
+        VoxeetSDK.shared.mediaDevice.switchDeviceSpeaker(forceBuiltInSpeaker: switchBuiltInSpeakerButton.tag == 0)
     }
     
     @IBAction func screenShareAction(_ sender: Any) {
-        guard screenShareUserID == nil || screenShareUserID == VoxeetSDK.shared.session.user?.id else {
+        guard screenShareUserID == nil || screenShareUserID == VoxeetSDK.shared.session.participant?.id else {
             return
         }
         
@@ -458,7 +459,7 @@ class VCKViewController: UIViewController {
         }
         
         // If the conference is not connected yet, retry the hang up action after few milliseconds to stop the conference.
-        guard VoxeetSDK.shared.conference.state == .connected else {
+        guard let current = VoxeetSDK.shared.conference.current, current.status == .created else {
             hangUpTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(hangUpRetry), userInfo: nil, repeats: true)
             return
         }
@@ -486,7 +487,7 @@ class VCKViewController: UIViewController {
         }
         
         ownVideoRenderer.subviews.first?.alpha = 0
-        VoxeetSDK.shared.conference.switchCamera {
+        VoxeetSDK.shared.mediaDevice.switchCamera {
             DispatchQueue.main.async {
                 UIView.animate(withDuration: 0.10, animations: {
                     self.ownVideoRenderer.subviews.first?.alpha = 1
@@ -519,28 +520,26 @@ class VCKViewController: UIViewController {
         }
         
         // Play outgoing sound only if the caller didn't join the conference yet.
-        if VoxeetSDK.shared.conference.users.filter({ $0.hasStream }).isEmpty {
-            // Play outgoing sound.
+        if getActiveParticipants().count == 0{
             outgoingSound?.play()
         }
     }
     
     @objc private func activeSpeaker() {
-        var loudestUser: VTUser?
+        var loudestUser: VTParticipant?
         var loudestVoiceLevel: Double = 0
         
         // Getting the loudest speaker.
-        for user in VoxeetSDK.shared.conference.users.filter({ $0.hasStream }) {
-            if let userID = user.id {
-                let currentVoiceLevel = VoxeetSDK.shared.conference.voiceLevel(userID: userID)
-                
+        let activeParticipants = getActiveParticipants()
+        for participant in activeParticipants{
+            if participant.id != nil && !participant.id!.isEmpty{
+                let currentVoiceLevel = VoxeetSDK.shared.conference.audioLevel(participant: participant)
                 if (mainUser == nil || currentVoiceLevel >= 0.01) && currentVoiceLevel >= loudestVoiceLevel {
-                    loudestUser = user
+                    loudestUser = participant
                     loudestVoiceLevel = currentVoiceLevel
                 }
             }
         }
-        
         if let user = loudestUser {
             updateMainUser(user: user)
         }
@@ -551,11 +550,11 @@ class VCKViewController: UIViewController {
         if case UIApplication.shared.applicationState = UIApplication.State.active {} else {
             return
         }
-        guard let userID = mainUser?.id, !UIDevice.current.proximityState else {
+        guard let _ = mainUser?.id, !UIDevice.current.proximityState else {
             return
         }
         
-        let voiceLevel = VoxeetSDK.shared.conference.voiceLevel(userID: userID)
+        let voiceLevel = VoxeetSDK.shared.conference.audioLevel(participant: mainUser!)
         
         if voiceLevel >= 0.01 { // Avoid useless animations.
             // y = ax + b.
@@ -606,8 +605,8 @@ class VCKViewController: UIViewController {
         }
         DispatchQueue.main.async {
             if (!self.callNameSet) {
-                if let endIndex = VoxeetSDK.shared.conference.alias?.firstIndex(of: ":") {
-                    self.callNameLabel.text = String(VoxeetSDK.shared.conference.alias![..<endIndex]).replacingOccurrences(of: "*", with: " ")
+                if let endIndex = VoxeetSDK.shared.conference.current?.alias.firstIndex(of: ":") {
+                    self.callNameLabel.text = String((VoxeetSDK.shared.conference.current?.alias[..<endIndex])!).replacingOccurrences(of: "*", with: " ")
                     self.callNameSet = true
                 }
             }
@@ -628,7 +627,7 @@ class VCKViewController: UIViewController {
             return
         }
         
-        if VoxeetSDK.shared.conference.state == .connected {
+        if let current = VoxeetSDK.shared.conference.current, current.status == .created {
             hangUpTimer?.invalidate()
             hangUpTimer = nil
             hangUpTimerCount = 0
@@ -649,43 +648,43 @@ class VCKViewController: UIViewController {
         activeSpeakerTimer?.fire()
     }
     
-    func updateMainUser(user: VTUser?) {
+    func updateMainUser(user: VTParticipant?) {
         let previousMainUser = mainUser
         
         mainUser = user
-        let avatarURL = user?.avatarURL ?? ""
+        let avatarURL = user?.info.avatarURL ?? ""
         mainAvatar.image = nil
         if avatarURL.count == 2 {
-            mainAvatar.image = InitialsImageFactory.imageWith(initials: user?.avatarURL, user: user)
+            mainAvatar.image = InitialsImageFactory.imageWith(initials: user?.info.avatarURL, user: user)
         } else {
             let imageURLStr = avatarURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
             if let imageURL = URL(string: imageURLStr) {
                 mainAvatar.kf.setImage(with: imageURL)
             }else if user != nil{
-                mainAvatar.image = InitialsImageFactory.imageWith(initials: user?.avatarURL, user: user)
+                mainAvatar.image = InitialsImageFactory.imageWith(initials: user?.info.avatarURL, user: user)
             }
         }
         
-        mainAvatarLabel.text = user?.name
+        mainAvatarLabel.text = user?.info.name
         
         let userID = user?.id
-        let stream = VoxeetSDK.shared.conference.mediaStream(userID: userID ?? "")
-        let screenStream = VoxeetSDK.shared.conference.screenShareMediaStream()
+        let stream = VoxeetSDK.shared.mediaDevice.mediaStream(userID: userID ?? "")
+        let screenStream = VoxeetSDK.shared.mediaDevice.screenShareMediaStream()
         
         // Unattach old main stream.
-        if let previousStream = VoxeetSDK.shared.conference.mediaStream(userID: previousMainUser?.id ?? ""), !previousStream.videoTracks.isEmpty && (previousMainUser?.id != userID || userID == screenShareUserID) {
-            VoxeetSDK.shared.conference.unattachMediaStream(previousStream, renderer: mainVideoRenderer)
+        if let previousStream = VoxeetSDK.shared.mediaDevice.mediaStream(userID: previousMainUser?.id ?? ""), !previousStream.videoTracks.isEmpty && (previousMainUser?.id != userID || userID == screenShareUserID) {
+            VoxeetSDK.shared.mediaDevice.unattachMediaStream(previousStream, renderer: mainVideoRenderer)
         }
         
         if !(stream?.videoTracks.isEmpty ?? true) || (!(screenStream?.videoTracks.isEmpty ?? true) && userID == screenShareUserID) {
             // Attach new stream.
-            if let screenStream = screenStream, userID == screenShareUserID {
+            if let _ = screenStream, userID == screenShareUserID {
                 mainVideoRenderer.isHidden = true
                 screenShareVideoRenderer.isHidden = false
             } else if let stream = stream {
                 mainVideoRenderer.isHidden = false
                 screenShareVideoRenderer.isHidden = true
-                VoxeetSDK.shared.conference.attachMediaStream(stream, renderer: mainVideoRenderer)
+                VoxeetSDK.shared.mediaDevice.attachMediaStream(stream, renderer: mainVideoRenderer)
             }
             
             // Update conferenceTimer view's background color.
@@ -762,4 +761,13 @@ class VCKViewController: UIViewController {
     
     @objc private func didEnterBackgroundNotification() {
     }
+    
+    // Check active participants
+     func getActiveParticipants() -> [VTParticipant] {
+         let participants = VoxeetSDK.shared.conference.current?.participants
+             .filter({ $0.id != VoxeetSDK.shared.session.participant?.id })
+             .filter({ $0.streams.isEmpty == false })
+         
+         return participants ?? [VTParticipant]()
+     }
 }
