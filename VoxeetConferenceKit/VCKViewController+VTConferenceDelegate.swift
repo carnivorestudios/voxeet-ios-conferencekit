@@ -10,18 +10,6 @@ import Foundation
 import VoxeetSDK
 
 extension VCKViewController: VTConferenceDelegate {
-    func streamAdded(participant: VTParticipant, stream: MediaStream) {
-        
-    }
-    
-    func streamUpdated(participant: VTParticipant, stream: MediaStream) {
-        
-    }
-    
-    func streamRemoved(participant: VTParticipant, stream: MediaStream) {
-        
-    }
-    
     func participantJoined(userID: String, stream: MediaStream) {
         if userID == VoxeetSDK.shared.session.user?.id {
             // Monkey patch: Wait WebRTC media to be started.
