@@ -57,6 +57,8 @@ import VoxeetSDK
         // CallKit notifications.
         NotificationCenter.default.addObserver(self, selector: #selector(callKitSwapped), name: .VTCallKitSwapped, object: nil)
         
+        VoxeetSDK.shared.conference.delegate = self
+        
         // Constraints updates notifications.
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deviceOrientationDidChange), name: UIDevice.orientationDidChangeNotification, object: nil)
@@ -437,13 +439,19 @@ extension VoxeetConferenceKit:VTConferenceDelegate {
             case .left:
                 // Hide conference.
                 hide()
-        case .joining: break
+        case .joining:
+            show()
+            break
             
-        case .joined: break
+        case .joined:
+            show()
+            break
             
         case .ended: break
             
-        case .destroyed: break
+        case .destroyed:
+            hide()
+            break
             
         case .error: break
             
