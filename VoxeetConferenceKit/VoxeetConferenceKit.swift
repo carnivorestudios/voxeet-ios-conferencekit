@@ -326,7 +326,29 @@ import VoxeetSDK
     private func closeKeyboard() {
         guard let vckVC = vckVC, let window = vckVC.view.window else { return }
         let presentedViewController = window.rootViewController?.presentedViewController ?? window.rootViewController
-        presentedViewController?.view.endEditing(true)
+        if let vc = self.getVisibleViewControllerFrom(presentedViewController){
+            vc.view.endEditing(true)
+        }
+    }
+    
+    private func getVisibleViewControllerFrom(_ vc: UIViewController?) -> UIViewController? {
+        if let nc = vc as? UINavigationController {
+            if nc is UIImagePickerController{
+                // viewcontroller will go nil while open imagepicker for precaution we put sleep here
+                sleep(UInt32(0.5))
+                return nc
+            }else{
+                return self.getVisibleViewControllerFrom(nc.visibleViewController)
+            }
+        } else if let tc = vc as? UITabBarController {
+            return self.getVisibleViewControllerFrom(tc.selectedViewController)
+        } else {
+            if let pvc = vc?.presentedViewController {
+                return self.getVisibleViewControllerFrom(pvc)
+            } else {
+                return vc
+            }
+        }
     }
 }
 
