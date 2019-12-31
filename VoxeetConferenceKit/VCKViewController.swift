@@ -588,6 +588,11 @@ class VCKViewController: UIViewController {
             }
         }
         DispatchQueue.main.async {
+            // Required for view need to in front of window
+            guard let window = UIApplication.shared.keyWindow else { return }
+            if window.subviews.contains(self.view){
+                window.bringSubviewToFront(self.view)
+            }
             if hour >= 1 {
                 self.conferenceTimerLabel.text = String(format: "%02.0f:%02.0f:%02.0f", floor(hour), floor(minute), floor(second))
             } else {
